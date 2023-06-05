@@ -21,7 +21,10 @@ local extend_tbl = utils.extend_tbl
 
 local server_config = "lsp.config."
 local setup_handlers = user_opts("lsp.setup_handlers", {
-  function(server, opts) require("lspconfig")[server].setup(opts) end,
+  function(server, opts)
+    require("lspconfig")[server].setup(opts)
+    -- there are no dartls here -- comment by sk
+  end,
 })
 
 M.diagnostics = { [0] = {}, {}, {}, {} }
@@ -150,7 +153,7 @@ M.on_attach = function(client, bufnr)
 
   if is_available "telescope.nvim" then
     lsp_mappings.n["<leader>lD"] =
-      { function() require("telescope.builtin").diagnostics() end, desc = "Search diagnostics" }
+    { function() require("telescope.builtin").diagnostics() end, desc = "Search diagnostics" }
   end
 
   if is_available "mason-lspconfig.nvim" then
@@ -161,13 +164,13 @@ M.on_attach = function(client, bufnr)
     lsp_mappings.n["<leader>lI"] = { "<cmd>NullLsInfo<cr>", desc = "Null-ls information" }
   end
 
-  if client.supports_method "textDocument/codeAction" then
-    lsp_mappings.n["<leader>la"] = {
-      function() vim.lsp.buf.code_action() end,
-      desc = "LSP code action",
-    }
-    lsp_mappings.v["<leader>la"] = lsp_mappings.n["<leader>la"]
-  end
+  -- if client.supports_method "textDocument/codeAction" then
+  --   lsp_mappings.n["<leader>la"] = {
+  --     function() vim.lsp.buf.code_action() end,
+  --     desc = "LSP code action",
+  --   }
+  --   lsp_mappings.v["<leader>la"] = lsp_mappings.n["<leader>la"]
+  -- end
 
   if client.supports_method "textDocument/codeLens" then
     add_buffer_autocmd("lsp_codelens_refresh", bufnr, {
@@ -222,9 +225,9 @@ M.on_attach = function(client, bufnr)
     local autoformat = M.formatting.format_on_save
     local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
     if
-      autoformat.enabled
-      and (tbl_isempty(autoformat.allow_filetypes or {}) or tbl_contains(autoformat.allow_filetypes, filetype))
-      and (tbl_isempty(autoformat.ignore_filetypes or {}) or not tbl_contains(autoformat.ignore_filetypes, filetype))
+        autoformat.enabled
+        and (tbl_isempty(autoformat.allow_filetypes or {}) or tbl_contains(autoformat.allow_filetypes, filetype))
+        and (tbl_isempty(autoformat.ignore_filetypes or {}) or not tbl_contains(autoformat.ignore_filetypes, filetype))
     then
       add_buffer_autocmd("lsp_auto_format", bufnr, {
         events = "BufWritePre",
@@ -319,9 +322,9 @@ M.on_attach = function(client, bufnr)
     }
   end
 
-  if client.supports_method "workspace/symbol" then
-    lsp_mappings.n["<leader>lG"] = { function() vim.lsp.buf.workspace_symbol() end, desc = "Search workspace symbols" }
-  end
+  -- if client.supports_method "workspace/symbol" then
+  --   lsp_mappings.n["<leader>lG"] = { function() vim.lsp.buf.workspace_symbol() end, desc = "Search workspace symbols" }
+  -- end
 
   if client.supports_method "textDocument/semanticTokens" and vim.lsp.semantic_tokens then
     lsp_mappings.n["<leader>uY"] = {
@@ -342,13 +345,13 @@ M.on_attach = function(client, bufnr)
     if lsp_mappings.n.gT then
       lsp_mappings.n.gT[1] = function() require("telescope.builtin").lsp_type_definitions() end
     end
-    if lsp_mappings.n["<leader>lG"] then
-      lsp_mappings.n["<leader>lG"][1] = function()
-        vim.ui.input({ prompt = "Symbol Query: " }, function(query)
-          if query then require("telescope.builtin").lsp_workspace_symbols { query = query } end
-        end)
-      end
-    end
+    -- if lsp_mappings.n["<leader>lG"] then
+    --   lsp_mappings.n["<leader>lG"][1] = function()
+    --     vim.ui.input({ prompt = "Symbol Query: " }, function(query)
+    --       if query then require("telescope.builtin").lsp_workspace_symbols { query = query } end
+    --     end)
+    --   end
+    -- end
   end
 
   if not vim.tbl_isempty(lsp_mappings.v) then
@@ -371,7 +374,7 @@ M.capabilities.textDocument.completion.completionItem.deprecatedSupport = true
 M.capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
 M.capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
 M.capabilities.textDocument.completion.completionItem.resolveSupport =
-  { properties = { "documentation", "detail", "additionalTextEdits" } }
+{ properties = { "documentation", "detail", "additionalTextEdits" } }
 M.capabilities.textDocument.foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
 M.capabilities = user_opts("lsp.capabilities", M.capabilities)
 M.flags = user_opts "lsp.flags"
