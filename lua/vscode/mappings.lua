@@ -33,6 +33,8 @@ local opts = { silent = true, remap = false }
 --
 -- map leader vs to run this command in vscode "workbench.action.openGlobalKeybindings"
 vim.api.nvim_set_keymap("n", "<leader>vs", "<cmd>call VSCodeNotify('workbench.action.openGlobalKeybindings')<cr>", { noremap = true })
+-- map leder vj to workbench.action.openSettingsJson
+vim.api.nvim_set_keymap("n", "<leader>vj", "<cmd>call VSCodeNotify('workbench.action.openSettingsJson')<cr>", { noremap = true })
 
 
 --- terminal
