@@ -316,8 +316,6 @@ vim.keymap.set("n", "<leader>an",
   ,opts)
   
 
-  -- map leader fw to workbench.action.findInFiles
-vim.api.nvim_set_keymap("n", "<leader>fw", "<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>", { noremap = true })
 
 -- map leap spooky
 vim.keymap.set("n", "yw",
@@ -402,4 +400,5 @@ vim.api.nvim_set_keymap("n", "<leader>fo", "<cmd>call VSCodeNotify('workbench.ac
 -- map leader fn to workbench.action.quickSwitchWindow
 vim.api.nvim_set_keymap("n", "<leader>fn", "<cmd>call VSCodeNotify('workbench.action.quickSwitchWindow')<cr>", { noremap = true })
 
--- map leader fw to find words
+  -- map leader fw to workbench.action.findInFiles
+vim.api.nvim_set_keymap("n", "<leader>fw", "<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>", { noremap = true })
