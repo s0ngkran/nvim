@@ -201,10 +201,20 @@ vim.keymap.set("n", "gr",
 -- map gt to workbench.action.nextEditor
 vim.api.nvim_set_keymap("n", "<leader>gt", "<cmd>call VSCodeNotify('workbench.action.nextEditorInGroup')<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "gt", "<cmd>call VSCodeNotify('workbench.action.previousEditorInGroup')<cr>", { noremap = true })
--- map gx to editor.action.marker.next
-vim.api.nvim_set_keymap("n", "gx", "<cmd>call VSCodeNotify('editor.action.marker.next')<cr>", { noremap = true })
 
---- map go to  
+
+vim.keymap.set("n", "gx",
+  function ()
+    -- go to insert mode
+    vim.cmd('startinsert')
+    -- run go
+    vim.cmd('call VSCodeNotify("editor.action.marker.next")')
+    -- delay 150 ms before go to normal mode
+    vim.cmd('sleep 300m')
+    -- go to normal mode
+    vim.cmd('stopinsert')
+  end
+  ,opts)
 vim.keymap.set("n", "go",
   function ()
     -- go to insert mode
