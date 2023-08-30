@@ -1,6 +1,4 @@
 if vim.g.vscode then
-
-
   -- packer.nvim configuration
   -- Ensure the plugin manager is initialized
   -- You can modify the installation path if desired
@@ -12,7 +10,7 @@ if vim.g.vscode then
           autocmd BufWritePost init.lua PackerLoad
       ]]
   end
-
+  
   -- Packer commands
   -- Make sure to put your plugin configurations after this block
 
@@ -29,15 +27,36 @@ if vim.g.vscode then
       -- for remote vim screen
       -- use 'jbyuki/instant.nvim'
       
-      use 'chentoast/marks.nvim'
+      -- harpoon
+      use 'nvim-lua/plenary.nvim'
+      use 'ThePrimeagen/harpoon'
+      use 'tpope/vim-surround'
+      use 'tommcdo/vim-exchange'
 
+    --   use({
+    --     "kylechui/nvim-surround",
+    --     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+    --     config = function()
+    --         require("nvim-surround").setup({
+    --             -- Configuration here, or leave empty to use defaults
+    --         })
+    --     end
+    -- })
+ --   [more stuff]                dsr             more stuff
+      -- "flash"
+      -- use 'folke/flash.nvim'
+
+      --- do not 'forget' to :PackerInstall
+      --- do not forget to :PackerInstall
+      --- do not forget to :PackerInstall
+      --- do not forget to :PackerInstall
+      --- do not forget to :PackerInstall
       -- ...
   end)
 
   -- for remote vim screen
   -- vim.g.instant_username = "SK-host"
   -- test commit
-
   
   -- vscode extension
   -- vscode extension
@@ -49,7 +68,7 @@ if vim.g.vscode then
     if not status_ok then vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault) end
   end
 
-
+--- color
   vim.api.nvim_exec([[
       " THEME CHANGER
       function! SetCursorLineNrColorInsert(mode)
@@ -73,6 +92,10 @@ if vim.g.vscode then
       augroup END
   ]], false)
   
+  vim.keymap.set('n', 's', function ()
+    local current_window = vim.fn.win_getid()
+    require('leap').leap { target_windows = { current_window } }
+  end)
 
 
   require('leap-spooky').setup {
@@ -121,3 +144,4 @@ else
 
   require("astronvim.utils").conditional_func(astronvim.user_opts("polish", nil, false), true)
 end
+ 
