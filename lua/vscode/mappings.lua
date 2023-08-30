@@ -33,9 +33,22 @@ local opts = { silent = true, remap = false }
 --
 -- map leader vs to run this command in vscode "workbench.action.openGlobalKeybindings"
 vim.api.nvim_set_keymap("n", "<leader>vs", "<cmd>call VSCodeNotify('workbench.action.openGlobalKeybindings')<cr>", { noremap = true })
+
 -- map leder vj to workbench.action.openSettingsJson
 vim.api.nvim_set_keymap("n", "<leader>vj", "<cmd>call VSCodeNotify('workbench.action.openSettingsJson')<cr>", { noremap = true })
 
+-- map leader vz to run workbench.action.toggleZenMode
+vim.api.nvim_set_keymap("n", "<leader>vz", "<cmd>call VSCodeNotify('workbench.action.toggleZenMode')<cr>", { noremap = true })
+
+-- map leader vm to run code ~/.config/nvim/lua
+vim.keymap.set("n", "<leader>vm",
+  function ()
+        vim.cmd('!code ~/.config/nvim/lua/vscode/mappings.lua')
+  end
+  ,opts)
+
+-- map leader vv to open-in-vim.open
+vim.api.nvim_set_keymap("n", "<leader>vv", "<cmd>call VSCodeNotify('open-in-vim.open')<cr>", { noremap = true })
 
 --- terminal
 --- terminal
@@ -104,22 +117,13 @@ vim.keymap.set("n", "<leader>gl", function()
 
   vim.cmd('!code ~/.temp.nvim.txt')
 end, opts)
+-- map leader gg to git-graph.view
+vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>call VSCodeNotify('git-graph.view')<cr>", { noremap = true })
+
+-- map leader gd to gitlens.diffWithPrevious
+vim.api.nvim_set_keymap("n", "<leader>gd", "<cmd>call VSCodeNotify('gitlens.diffWithPrevious')<cr>", { noremap = true })
 
 
--- map leader tx to function
-vim.keymap.set("n", "<leader>gd",
-  function ()
-      -- get whole current line 
-      local current_line = vim.fn.getline(".")
-      -- get word following pattern \<[0-9a-f]\{7,\}\>
-      local word = vim.fn.matchstr(current_line, "\\<[0-9a-f]\\{8,\\}\\>")
-    -- copy to clipboard
-    vim.fn.setreg("+", word)
-
-    -- run call VSCodeNotify('gitlens.compareHeadWith')<cr>
-    vim.cmd('call VSCodeNotify("gitlens.compareHeadWith")')
-  end
-  ,opts)
 
 --- editor
 --- editor
@@ -169,17 +173,9 @@ vim.api.nvim_set_keymap("n", "<leader>m", "<cmd>e#<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "H", "0", { noremap = true })
 vim.api.nvim_set_keymap("n", "L", "$", { noremap = true })
 vim.api.nvim_set_keymap("n", "ga", "$h%", { noremap = true })
-vim.api.nvim_set_keymap("v", "ga", "$h%", { noremap = true })
 vim.api.nvim_set_keymap("n", "gA", "%", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "cx", "cxiw", { noremap = true })
 -- vim.api.nvim_set_keymap("n", "gn", "*", { noremap = true })
-vim.keymap.set("v", "gc",
-  function ()
-    -- run gc
-    vim.cmd('call VSCodeNotify("editor.action.commentLine")')
-    -- stop visual mode
-    combo("<Esc>")
-  end
-  ,opts)
 
 --- map gc in normal mode as editor.action.commentLine
 vim.api.nvim_set_keymap("n", "gc", "<cmd>call VSCodeNotify('editor.action.commentLine')<cr>", { noremap = true })
@@ -197,10 +193,6 @@ vim.keymap.set("n", "gr",
 --- g navigation
 --- g navigation
 --- g navigation
-
--- map gt to workbench.action.nextEditor
-vim.api.nvim_set_keymap("n", "<leader>gt", "<cmd>call VSCodeNotify('workbench.action.nextEditorInGroup')<cr>", { noremap = true })
-vim.api.nvim_set_keymap("n", "gt", "<cmd>call VSCodeNotify('workbench.action.previousEditorInGroup')<cr>", { noremap = true })
 
 
 vim.keymap.set("n", "gx",
@@ -274,19 +266,30 @@ vim.api.nvim_set_keymap("n", "<leader>lr", "<cmd>call VSCodeNotify('editor.actio
 -- map leader dd to workbench.action.debug.start
 vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>call VSCodeNotify('workbench.action.debug.start')<cr>", { noremap = true })
 
+-- map leader dr to workbench.action.debug.restart
+vim.api.nvim_set_keymap("n", "<leader>dr", "<cmd>call VSCodeNotify('workbench.action.debug.restart')<cr>", { noremap = true })
+
+-- map leader ds to workbench.action.debug.stop
+vim.api.nvim_set_keymap("n", "<leader>ds", "<cmd>call VSCodeNotify('workbench.action.debug.stop')<cr>", { noremap = true })
+
+-- map leader dv to flutter.selectDevice
+vim.api.nvim_set_keymap("n", "<leader>dv", "<cmd>call VSCodeNotify('flutter.selectDevice')<cr>", { noremap = true })  
+
+
 -- util
 -- util
 -- util
 -- util
 -- util
 -- util
+
 
 
 -- map GG to workbench.action.reloadWindow
 vim.api.nvim_set_keymap("n", "<leader>ar", "<cmd>call VSCodeNotify('workbench.action.reloadWindow')<cr>", { noremap = true })
 
--- map leader am to mdx-preview.commands.openPreview
-vim.api.nvim_set_keymap("n", "<leader>am", "<cmd>call VSCodeNotify('markdown.showPreview')<cr>", { noremap = true })
+-- map leader aam to mdx-preview.commands.openPreview
+vim.api.nvim_set_keymap("n", "<leader>aam", "<cmd>call VSCodeNotify('markdown.showPreview')<cr>", { noremap = true })
 
 -- map leader ae to find exports =
 vim.keymap.set("n", "<leader>ae",
@@ -311,13 +314,58 @@ vim.keymap.set("n", "<leader>a,",
  -- map leader an to next of diff in vscode
 vim.keymap.set("n", "<leader>an",
   function ()
+
     combo("<C-h>j")
   end
   ,opts)
+
+vim.keymap.set("n", '<leader>av',
+  function ()
+    combo('V%')
+  end
+  ,opts)
+vim.keymap.set("n", "<leader>ad",
+  function ()
+      -- get whole current line 
+      local current_line = vim.fn.getline(".")
+      -- get word following pattern \<[0-9a-f]\{7,\}\>
+      local word = vim.fn.matchstr(current_line, "\\<[0-9a-f]\\{8,\\}\\>")
+    -- copy to clipboard
+    vim.fn.setreg("+", word)
+
+    -- run call VSCodeNotify('gitlens.compareHeadWith')<cr>
+    vim.cmd('call VSCodeNotify("gitlens.compareHeadWith")')
+  end
+  ,opts)
   
+-- map gm to vscode-harpoon.addEditor
+vim.api.nvim_set_keymap("n", "gm", "<cmd>call VSCodeNotify('vscode-harpoon.addEditor')<cr>", { noremap = true })
+-- map gh to vscode-harpoon.editorQuickPick
+vim.api.nvim_set_keymap("n", "gh", "<cmd>call VSCodeNotify('vscode-harpoon.editorQuickPick')<cr>", { noremap = true })
+
+-- map leader tv to workbench.action.createTerminalEditor
+-- vim.api.nvim_set_keymap("n", "<leader>tv", "<cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>tv",
+  function ()
+    vim.cmd("call VSCodeNotify('workbench.action.createTerminalEditor')")
+  end
+  ,opts)
 
 
--- map leap spooky
+-- source
+vim.api.nvim_set_keymap("n", "<leader>ss", "<cmd>source<cr>", { noremap = true })
+
+
+
+-- map leader kl to workbench.action.moveActiveEditorGroupRight
+vim.api.nvim_set_keymap("n", "<leader>kl", "<cmd>call VSCodeNotify('workbench.action.moveActiveEditorGroupRight')<cr>", { noremap = true })
+-- map leader kh to workbench.action.moveActiveEditorGroupLeft
+vim.api.nvim_set_keymap("n", "<leader>kh", "<cmd>call VSCodeNotify('workbench.action.moveActiveEditorGroupLeft')<cr>", { noremap = true })
+
+
+
+
+-- map leap spooky yir
 vim.keymap.set("n", "yw",
   function ()
     combo("yirw")
@@ -344,7 +392,62 @@ vim.keymap.set("n", 'y"',
   end
   ,opts)
 
+-- map leap spooky cim
+vim.keymap.set("n", "cw",
+  function ()
+    combo("cimw")
+  end
+  ,opts)
+vim.keymap.set("n", "cb",
+  function ()
+    combo("cimb")
+  end
+  ,opts)
+vim.keymap.set("n", "cB", 
+  function ()
+    combo("cimB")
+  end
+  ,opts)
+vim.keymap.set("n", "c'",
+  function ()
+    combo("cim'")
+  end
+  ,opts)
+vim.keymap.set("n", 'c"',
+  function ()
+    combo('cim"')
+  end
+  ,opts)
   
+-- map leap spooky dir
+vim.keymap.set("n", "dw",
+  function ()
+    combo("dirw")
+  end
+  ,opts)
+vim.keymap.set("n", "db",
+  function ()
+    combo("dirb")
+  end
+  ,opts)
+vim.keymap.set("n", "dB",
+  function ()
+    combo("dirB")
+  end
+  ,opts)
+vim.keymap.set("n", "d'",
+  function ()
+    combo("dir'")
+  end
+  ,opts)
+vim.keymap.set("n", 'd"',
+  function ()
+    combo('dir"')
+  end
+  ,opts)
+
+  
+
 --[[ 
   
 tester
@@ -368,7 +471,7 @@ tester
 -- map leader gf to workbench.action.toggleMaximizedPanel
 vim.api.nvim_set_keymap("n", "<leader>uf", "<cmd>call VSCodeNotify('workbench.action.toggleMaximizedPanel')<cr>", { noremap = true })
 
--- map leader df to workbench.panel.repl.view.focus
+-- map leader ud to workbench.panel.repl.view.focus
 vim.api.nvim_set_keymap("n", "<leader>ud", "<cmd>call VSCodeNotify('workbench.panel.repl.view.focus')<cr>", { noremap = true })
 
 -- map leader up to workbench.action.problems.focus
@@ -402,3 +505,15 @@ vim.api.nvim_set_keymap("n", "<leader>fn", "<cmd>call VSCodeNotify('workbench.ac
 
   -- map leader fw to workbench.action.findInFiles
 vim.api.nvim_set_keymap("n", "<leader>fw", "<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>", { noremap = true })
+
+
+-- visual mode
+vim.api.nvim_set_keymap("v", "x", "$h%", { noremap = true })
+vim.keymap.set("v", "gc",
+  function ()
+    -- run gc
+    vim.cmd('call VSCodeNotify("editor.action.commentLine")')
+    -- stop visual mode
+    combo("<Esc>")
+  end
+  ,opts)
