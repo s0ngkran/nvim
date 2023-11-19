@@ -1,0 +1,240 @@
+snippet tds
+	// TODO: @s0ngkran hi ho
+
+snippet tdo
+	// TODO: @Ozarkk191 
+
+snippet tdp
+	// TODO: @PENGKIE
+
+snippet tdy
+	// TODO: @yMzThai
+
+snippet ctl
+  import 'package:get/get.dart';
+  import 'package:pengkie_utility/core.dart';
+  class $1Ctl extends GetxController {
+	  static $1Ctl get to => Get.find();
+	  var dummy = ''.obs;
+	  @override
+	  void onInit() {
+		  super.onInit();
+		  '$1Ctl.onInit()'.logg;
+	  }
+  }
+
+snippet stl
+  import 'package:flutter/material.dart';
+  import 'package:pengkie_utility/core.dart';
+  import 'package:get/get.dart';
+  import '../modules.dart';
+  import '../../shared/my_view.dart';
+
+  class $1Scr extends Hoo<$1Ctl> {
+    const $1Scr({super.key});
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('$1Scr'),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              '$1Scr'.h1,
+              'clickme'.btn(() {
+                'hello $1Scr'.di;
+              })
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
+snippet kf
+  GlobalKey<FormState> ${1: kf} = GlobalKey<FormState>();
+
+snippet tc
+  TextEditingController $1 = TextEditingController();
+
+
+snippet varr
+  var res = await c.$1();
+  res.match(
+    (l) {
+      'fail $l\nDo not use me in production!!!'.di;
+    },
+    (r) {
+      'success[$1] r=$r';
+    },
+  );
+
+snippet res..
+  res.match(
+    (l) {
+      'fail $l\nDo not use me in production!!!'.di;
+    },
+    (r) {
+      'success[$1] r=$r';
+    },
+  );
+
+snippet res.
+  res.match(
+    (l) {
+      // TODO: 
+      throw 'fail $l\nDo not use me in production!!!';
+    },
+    (r) {
+      return null;
+    },
+  );
+
+
+snippet stll
+  import 'package:flutter/material.dart';
+  import 'package:pengkie_utility/core.dart';
+
+  class $1Widget extends StatelessWidget {
+
+    const $1Widget({
+      super.key,
+    });
+
+    @override
+    Widget build(BuildContext context) {
+      return Text(
+        '$1-test',
+      );
+  }
+
+
+snippet gp
+  GetPage(
+    name: Routes.xxx,
+    page: () => const $1Scr(),
+    binding: BindingsBuilder(
+      () => Get.lazyPut(() => $1Ctl()),
+    ),
+  ),
+
+
+
+snippet hand
+  SingleChildScrollView(
+        child: Obx(() {
+          var $1 = hh.$1.value;
+          return Column(
+            children: [
+              HandleList(
+                variable: $1,
+                loadingWidget: null,
+                emptyWidget: null,
+                hasDataWidget: (data) {
+                  return SizedBox(
+                    height: 125,
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: data.length,
+                      itemBuilder: ((context, index) {
+                        return ChatRoomWidget(
+                          roomName: "name",
+                          userUrl: 'url',
+                          lastMessage: 'str',
+                          dateTime: DateTime.now(),
+                          isOnline: true,
+                          isRead: true,
+                          newMessages: 3,
+                        );
+                      }),
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
+        }),
+      ),
+
+snippet obx
+  Obx(() {
+  List<ConsumerChatRoomm> chatRooms = hh.$1.value ?? [];
+  '$1: ${$1.length}'.logg;
+  return Column(
+    children: [
+      for (ConsumerChatRoomm room in $1)
+        ChatRoomWidget(
+          onTap: (){
+              dii;
+            },
+          roomName: "name",
+        ),
+    ],
+  );
+  }),
+
+
+snippet btn
+  '$1'.btn((){  
+    'clicked $1'.logg;
+
+    }),
+
+snippet btnt
+  '$1'.btnText((){  
+    'clicked $1'.logg;
+
+    }),
+
+snippet sta
+  StatelessWidget
+
+snippet con
+  Container(
+    color: Colors.red,
+    child: const Text('hello'),
+  ),
+
+snippet key
+  GlobalKey key = GlobalKey();
+
+snippet c
+  Column(
+    children: [
+      $1
+    ],
+  ),
+
+snippet r row
+  Row(
+    children: [
+      $1
+    ],
+  ),
+
+snippet gql
+  var res = await gql.client.sendGraphQL(
+    '''
+
+    ''',
+    variables: {
+        'input': {
+          'name': 'test',
+        }
+      },
+    printInputString: true,
+  );
+
+snippet txt
+  Text(
+    '$1',
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 16,xxx
+    ),
+  ),
+
+
+

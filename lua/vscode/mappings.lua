@@ -1,3 +1,4 @@
+
 vim.o.clipboard = 'unnamedplus'
 vim.cmd('syntax enable')
 vim.cmd('filetype plugin indent on')
@@ -10,7 +11,7 @@ vim.o.ignorecase = true
 
 
 -- this is mappings.lua for nvim
-
+--
 -- map leader to space
 vim.g.mapleader = " "
 
@@ -24,6 +25,9 @@ end
 
 local opts = { silent = true, remap = false }
 
+
+
+
 --- vscode
 --- vscode
 --- vscode
@@ -31,8 +35,32 @@ local opts = { silent = true, remap = false }
 --- vscode
 --- vscode
 --
+
+-- do not delete me
+-- -- map j to cursorDown
+-- vim.api.nvim_set_keymap("n", "j", "<cmd>call VSCodeNotify('cursorDown')<cr>", { noremap = true })
+-- -- map k to cursorUp
+-- vim.api.nvim_set_keymap("n", "k", "<cmd>call VSCodeNotify('cursorUp')<cr>", { noremap = true })
+-- map j to gj
+-- vim.api.nvim_set_keymap("n", "j", "gj", { noremap = true })
+-- map k to gk
+-- vim.api.nvim_set_keymap("n", "k", "gk", { noremap = true })
+
+-- map za to editor.toggleFold
+vim.api.nvim_set_keymap("n", "za", "<cmd>call VSCodeNotify('editor.toggleFold')<cr>", { noremap = true })
+-- -- map zm to editor.foldAll
+vim.api.nvim_set_keymap("n", "zM", "<cmd>call VSCodeNotify('editor.foldAll')<cr>", { noremap = true })
+-- map zr to editor.unfoldAll
+vim.api.nvim_set_keymap("n", "zr", "<cmd>call VSCodeNotify('editor.unfoldAll')<cr>", { noremap = true })
+-- map zo to editor.unfoldRecursively
+vim.api.nvim_set_keymap("n", "zo", "<cmd>call VSCodeNotify('editor.unfoldRecursively')<cr>", { noremap = true })
+-- map zc to editor.fold
+vim.api.nvim_set_keymap("n", "zc", "<cmd>call VSCodeNotify('editor.fold')<cr>", { noremap = true })
+
+
 -- map leader vs to run this command in vscode "workbench.action.openGlobalKeybindings"
 vim.api.nvim_set_keymap("n", "<leader>vs", "<cmd>call VSCodeNotify('workbench.action.openGlobalKeybindings')<cr>", { noremap = true })
+
 
 -- map leder vj to workbench.action.openSettingsJson
 vim.api.nvim_set_keymap("n", "<leader>vj", "<cmd>call VSCodeNotify('workbench.action.openSettingsJson')<cr>", { noremap = true })
@@ -46,9 +74,15 @@ vim.keymap.set("n", "<leader>vm",
         vim.cmd('!code ~/.config/nvim/lua/vscode/mappings.lua')
   end
   ,opts)
+vim.keymap.set("n", "<leader>vi",
+  function ()
+        vim.cmd('!code ~/.config/nvim/init.lua')
+  end
+  ,opts)
 
 -- map leader vv to open-in-vim.open
 vim.api.nvim_set_keymap("n", "<leader>vv", "<cmd>call VSCodeNotify('open-in-vim.open')<cr>", { noremap = true })
+
 
 --- terminal
 --- terminal
@@ -85,7 +119,7 @@ vim.api.nvim_set_keymap("n", "<leader>vv", "<cmd>call VSCodeNotify('open-in-vim.
 
 -- map leader gp to pr:github.focus
 
-vim.keymap.set("n", "<leader>gp",
+vim.keymap.set("n", "<leader>p",
   function ()
     vim.cmd("call VSCodeNotify('pr:github.focus')")
     vim.cmd("call VSCodeNotify('pr.refreshList')")
@@ -95,7 +129,7 @@ vim.keymap.set("n", "<leader>gp",
 -- map gb to gitlens.toggleFileBlame 
 vim.api.nvim_set_keymap("n", "gb", "<cmd>call VSCodeNotify('gitlens.toggleFileBlame')<cr>", { noremap = true })
 
-vim.keymap.set("n", "<leader>ga",
+vim.keymap.set("n", "<leader>gm",
   function ()
         local result = vim.fn.systemlist("gh pr merge --auto --merge && gh pr review --approve")
 
@@ -107,6 +141,19 @@ vim.keymap.set("n", "<leader>ga",
   end
   ,opts)
 
+  -- hoo a
+vim.keymap.set("n", "<leader>an", function()
+  local path = vim.fn.expand("%")
+  vim.fn.system('echo "running" > ~/.temp.nvim.txt')
+  vim.cmd('!code ~/.temp.nvim.txt')
+  -- result = __vscode_neovim__-file:///Users/walter/projects/songkarn/functions/conm/c_get_promotion/func.js
+  -- cut __vscode_neovim__-file://
+  local result = vim.fn.systemlist("echo " .. path .. " | cut -c 26-")
+  
+  -- run node
+  local out = vim.fn.system('node ' .. table.concat(result, "\n") .. ' > ~/.temp.nvim.txt')
+
+end, opts)
 -- map leader gl to run this command 'gl > ~/.gl.temp; code ~/.gl.temp' 
 vim.keymap.set("n", "<leader>gl", function()
   -- run this command 'gl > ~/.gl.temp; code ~/.gl.temp'
@@ -120,8 +167,17 @@ end, opts)
 -- map leader gg to git-graph.view
 vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>call VSCodeNotify('git-graph.view')<cr>", { noremap = true })
 
+-- map leader gc to workbench.action.terminal.newWithCwd
+vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>call VSCodeNotify('workbench.action.terminal.newWithCwd')<cr>", { noremap = true })
+
+-- map leader gk to workbench.action.terminal.killAll
+vim.api.nvim_set_keymap("n", "<leader>gk", "<cmd>call VSCodeNotify('workbench.action.terminal.killAll')<cr>", { noremap = true })
+
+-- map leader gj to multiCommand.openTerminalForCurrentFile
+vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>call VSCodeNotify('multiCommand.openTerminalForCurrentFile')<cr>", { noremap = true })
+
 -- map leader gd to gitlens.diffWithPrevious
-vim.api.nvim_set_keymap("n", "<leader>gd", "<cmd>call VSCodeNotify('gitlens.diffWithPrevious')<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "gt", "<cmd>call VSCodeNotify('gitlens.diffWithPrevious')<cr>", { noremap = true })
 
 
 
@@ -132,12 +188,10 @@ vim.api.nvim_set_keymap("n", "<leader>gd", "<cmd>call VSCodeNotify('gitlens.diff
 --- editor
 --- editor
 --
--- map leader jj to workbench.action.togglePanel
-vim.api.nvim_set_keymap("n", "<leader>jj", "<cmd>call VSCodeNotify('workbench.action.togglePanel')<cr>", { noremap = true })
 -- map leader q to workbench.action.closeWindow
 vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<cr>", { noremap = true })
--- map leader w to workbench.action.files.save
-vim.api.nvim_set_keymap("n", "<leader>w", "<cmd>call VSCodeNotify('workbench.action.files.save')<cr>", { noremap = true })
+
+
 -- map leader c to workbench.action.closeAllEditors 
 vim.keymap.set("n", "<leader>c",
   function ()
@@ -149,33 +203,39 @@ vim.keymap.set("n", "<leader>c",
   end
   ,opts)
 
-vim.keymap.set("n", "<leader>gn",
-  function ()
-    vim.cmd("call VSCodeNotify('workbench.action.splitEditorRight)")
-    vim.cmd('sleep 300m')
-    combo("*")
-  end
-  ,opts)
-
 -- map \ to workbench.action.splitEditorRight
 vim.api.nvim_set_keymap("n", "\\", "<cmd>call VSCodeNotify('workbench.action.splitEditorRight')<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "|", "<cmd>call VSCodeNotify('workbench.action.splitEditorDown')<cr>", { noremap = true })
 
 
+-- map ledaer m to editor.action.triggerSuggest
 
--- map ledaer m to run :e#<CR>
-vim.api.nvim_set_keymap("n", "<leader>m", "<cmd>e#<cr>", { noremap = true })
+
+
+vim.api.nvim_set_keymap("n", "ga", "<cmd>call VSCodeNotify('multiCommand.openPreviousFile')<cr>", { noremap = true })
+
+-- lazygit
+vim.api.nvim_set_keymap("n", "<leader>l", "<cmd>call VSCodeNotify('multiCommand.lazygit')<cr>", { noremap = true })
 
 --map H as 0
 --map L as $
 --map ga as $h%
 --map gA as %
-vim.api.nvim_set_keymap("n", "H", "0", { noremap = true })
-vim.api.nvim_set_keymap("n", "L", "$", { noremap = true })
-vim.api.nvim_set_keymap("n", "ga", "$h%", { noremap = true })
-vim.api.nvim_set_keymap("n", "gA", "%", { noremap = true })
--- vim.api.nvim_set_keymap("n", "cx", "cxiw", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "H", "0", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "L", "$", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "ga", "$h%", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "cw", "cxiw", { noremap = true })
 -- vim.api.nvim_set_keymap("n", "gn", "*", { noremap = true })
+
+-- map L to workbench.action.nextEditorInGroup
+vim.api.nvim_set_keymap("n", "L", "<cmd>call VSCodeNotify('workbench.action.nextEditorInGroup')<cr>", { noremap = true })
+-- map H to workbench.action.previousEditorInGroup
+vim.api.nvim_set_keymap("n", "H", "<cmd>call VSCodeNotify('workbench.action.previousEditorInGroup')<cr>", { noremap = true })
+
+vim.api.nvim_set_keymap("n", "zj", "L", { noremap = true })
+vim.api.nvim_set_keymap("n", "zm", "M", { noremap = true })
+vim.api.nvim_set_keymap("n", "zk", "H", { noremap = true })
+
 
 --- map gc in normal mode as editor.action.commentLine
 vim.api.nvim_set_keymap("n", "gc", "<cmd>call VSCodeNotify('editor.action.commentLine')<cr>", { noremap = true })
@@ -241,20 +301,16 @@ vim.keymap.set("n", "gn",
 --- lsp
 --- lsp
 --- lsp
--- map leader lh to editor.action.showHover
-vim.api.nvim_set_keymap("n", "<leader>lh", "<cmd>call VSCodeNotify('editor.action.showHover')<cr>", { noremap = true })
 
--- map leader ll to format document
+-- map leader gf to format document
 vim.api.nvim_set_keymap("n", "gf", "<cmd>call VSCodeNotify('editor.action.formatDocument')<cr>", { noremap = true })
 -- vim.api.nvim_set_keymap("n", "<leader>ll", "<cmd>call VSCodeNotify('editor.action.formatDocument')<cr>", { noremap = true })
 -- vim.api.nvim_set_keymap("n", "<leader>lf", "<cmd>call VSCodeNotify('editor.action.formatDocument')<cr>", { noremap = true })
 
--- map leader la to editor.action.quickFix
--- vim.api.nvim_set_keymap("n", "<leader>la", "<cmd>call VSCodeNotify('editor.action.quickFix')<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "gl", "<cmd>call VSCodeNotify('editor.action.quickFix')<cr>", { noremap = true })
 
--- map leader lr to editor.action.rename
-vim.api.nvim_set_keymap("n", "<leader>lr", "<cmd>call VSCodeNotify('editor.action.rename')<cr>", { noremap = true })
+-- map leader r to editor.action.rename
+-- vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>call VSCodeNotify('editor.action.rename')<cr>", { noremap = true })
 
 --- debug
 --- debug
@@ -267,7 +323,8 @@ vim.api.nvim_set_keymap("n", "<leader>lr", "<cmd>call VSCodeNotify('editor.actio
 vim.api.nvim_set_keymap("n", "<leader>dd", "<cmd>call VSCodeNotify('workbench.action.debug.start')<cr>", { noremap = true })
 
 -- map leader dr to workbench.action.debug.restart
-vim.api.nvim_set_keymap("n", "<leader>dr", "<cmd>call VSCodeNotify('workbench.action.debug.restart')<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>dr", "<cmd>call VSCodeNotify('flutter.hotRestart')<cr>", { noremap = true })
+
 
 -- map leader ds to workbench.action.debug.stop
 vim.api.nvim_set_keymap("n", "<leader>ds", "<cmd>call VSCodeNotify('workbench.action.debug.stop')<cr>", { noremap = true })
@@ -283,7 +340,13 @@ vim.api.nvim_set_keymap("n", "<leader>dv", "<cmd>call VSCodeNotify('flutter.sele
 -- util
 -- util
 
+-- source
+vim.api.nvim_set_keymap("n", "<leader>as", "<cmd>source<cr>", { noremap = true })
+-- map leader ap to copyFilePath
+vim.api.nvim_set_keymap("n", "<leader>ap", "<cmd>call VSCodeNotify('copyFilePath')<cr>", { noremap = true })
 
+-- map leader ai to :PackerInstall
+vim.api.nvim_set_keymap("n", "<leader>ai", ":PackerInstall<cr>", { noremap = true })
 
 -- map GG to workbench.action.reloadWindow
 vim.api.nvim_set_keymap("n", "<leader>ar", "<cmd>call VSCodeNotify('workbench.action.reloadWindow')<cr>", { noremap = true })
@@ -311,20 +374,14 @@ vim.keymap.set("n", "<leader>a,",
     combo("yy?const<CR>kp<Esc>ciwfinal<Esc>$r;hgnhv?required<CR>elc this.<Esc>2j<leader>ll")
   end
   ,opts)
- -- map leader an to next of diff in vscode
-vim.keymap.set("n", "<leader>an",
-  function ()
 
-    combo("<C-h>j")
-  end
-  ,opts)
-
-vim.keymap.set("n", '<leader>av',
+vim.keymap.set("n", 'gv',
   function ()
     combo('V%')
   end
   ,opts)
-vim.keymap.set("n", "<leader>ad",
+
+vim.keymap.set("n", "<leader>ac",
   function ()
       -- get whole current line 
       local current_line = vim.fn.getline(".")
@@ -343,27 +400,31 @@ vim.api.nvim_set_keymap("n", "gm", "<cmd>call VSCodeNotify('vscode-harpoon.addEd
 -- map gh to vscode-harpoon.editorQuickPick
 vim.api.nvim_set_keymap("n", "gh", "<cmd>call VSCodeNotify('vscode-harpoon.editorQuickPick')<cr>", { noremap = true })
 
--- map leader tv to workbench.action.createTerminalEditor
--- vim.api.nvim_set_keymap("n", "<leader>tv", "<cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<cr>", { noremap = true })
-vim.keymap.set("n", "<leader>tv",
+-- terminal
+-- vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<cr>", { noremap = true })
+
+
+-- map leader wl to workbench.action.moveActiveEditorGroupRight
+vim.api.nvim_set_keymap("n", "<leader>wl", "<cmd>call VSCodeNotify('workbench.action.moveActiveEditorGroupRight')<cr>", { noremap = true })
+-- map leader wh to workbench.action.moveActiveEditorGroupLeft
+vim.api.nvim_set_keymap("n", "<leader>wh", "<cmd>call VSCodeNotify('workbench.action.moveActiveEditorGroupLeft')<cr>", { noremap = true })
+-- map leader wq to workbench.action.closeEditorsInGroup
+vim.api.nvim_set_keymap("n", "<leader>wq", "<cmd>call VSCodeNotify('workbench.action.closeEditorsInGroup')<cr>", { noremap = true })
+
+-- map leader ww to workbench.action.files.save
+vim.api.nvim_set_keymap("n", "<leader>ww", "<cmd>call VSCodeNotify('workbench.action.files.save')<cr>", { noremap = true })
+
+    -- ['yd'] = {
+    --   function()
+    --     combo('diwhyirw')
+    --   end,
+    --   desc = "yank line"
+    -- },
+vim.keymap.set("n", "yd",
   function ()
-    vim.cmd("call VSCodeNotify('workbench.action.createTerminalEditor')")
+    combo("diwhyirw")
   end
   ,opts)
-
-
--- source
-vim.api.nvim_set_keymap("n", "<leader>ss", "<cmd>source<cr>", { noremap = true })
-
-
-
--- map leader kl to workbench.action.moveActiveEditorGroupRight
-vim.api.nvim_set_keymap("n", "<leader>kl", "<cmd>call VSCodeNotify('workbench.action.moveActiveEditorGroupRight')<cr>", { noremap = true })
--- map leader kh to workbench.action.moveActiveEditorGroupLeft
-vim.api.nvim_set_keymap("n", "<leader>kh", "<cmd>call VSCodeNotify('workbench.action.moveActiveEditorGroupLeft')<cr>", { noremap = true })
-
-
-
 
 -- map leap spooky yir
 vim.keymap.set("n", "yw",
@@ -391,31 +452,41 @@ vim.keymap.set("n", 'y"',
     combo('yir"')
   end
   ,opts)
+vim.keymap.set("n", 'yl',
+  function ()
+    combo('yrr')
+  end
+  ,opts)
 
 -- map leap spooky cim
 vim.keymap.set("n", "cw",
   function ()
-    combo("cimw")
+    combo("cirw")
   end
   ,opts)
 vim.keymap.set("n", "cb",
   function ()
-    combo("cimb")
+    combo("cirb")
   end
   ,opts)
 vim.keymap.set("n", "cB", 
   function ()
-    combo("cimB")
+    combo("cirB")
   end
   ,opts)
 vim.keymap.set("n", "c'",
   function ()
-    combo("cim'")
+    combo("cir'")
   end
   ,opts)
 vim.keymap.set("n", 'c"',
   function ()
-    combo('cim"')
+    combo('cir"')
+  end
+  ,opts)
+vim.keymap.set("n", 'cl',
+  function ()
+    combo('crr')
   end
   ,opts)
   
@@ -445,6 +516,11 @@ vim.keymap.set("n", 'd"',
     combo('dir"')
   end
   ,opts)
+vim.keymap.set("n", 'dl',
+  function ()
+    combo('drr')
+  end
+  ,opts)
 
   
 
@@ -469,13 +545,13 @@ tester
 --- ui
 --- ui
 -- map leader gf to workbench.action.toggleMaximizedPanel
-vim.api.nvim_set_keymap("n", "<leader>uf", "<cmd>call VSCodeNotify('workbench.action.toggleMaximizedPanel')<cr>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<leader>uf", "<cmd>call VSCodeNotify('workbench.action.toggleMaximizedPanel')<cr>", { noremap = true })
 
 -- map leader ud to workbench.panel.repl.view.focus
-vim.api.nvim_set_keymap("n", "<leader>ud", "<cmd>call VSCodeNotify('workbench.panel.repl.view.focus')<cr>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<leader>ud", "<cmd>call VSCodeNotify('workbench.panel.repl.view.focus')<cr>", { noremap = true })
 
 -- map leader up to workbench.action.problems.focus
-vim.api.nvim_set_keymap("n", "<leader>up", "<cmd>call VSCodeNotify('workbench.action.problems.focus')<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "gp", "<cmd>call VSCodeNotify('workbench.action.problems.focus')<cr>", { noremap = true })
 
 -- map leader uh to todohighlight.toggleHighlight
 vim.api.nvim_set_keymap("n", "<leader>uh", "<cmd>call VSCodeNotify('todohighlight.toggleHighlight')<cr>", { noremap = true })
@@ -486,29 +562,48 @@ vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>call VSCodeNotify('workbench.act
 -- map leader o to workbench.files.action.focusFilesExplorer
 vim.api.nvim_set_keymap("n", "<leader>o", "<cmd>call VSCodeNotify('workbench.files.action.focusFilesExplorer')<cr>", { noremap = true })
 
+-- show hover
+vim.api.nvim_set_keymap("n", "<leader>k", "<cmd>call VSCodeNotify('editor.action.showDefinitionPreviewHover')<cr>", { noremap = true })
+
 --- find
 --- find
 --- find
 --- find
 
--- map leader ff to workbench.action.quickOpen
-vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>call VSCodeNotify('workbench.action.quickOpen')<cr>", { noremap = true })
+-- map leader f to workbench.action.quickOpen
+vim.api.nvim_set_keymap("n", "<leader>f", "<cmd>call VSCodeNotify('workbench.action.quickOpen')<cr>", { noremap = true })
 
--- map leader fs to workbench.action.gotoSymbol
-vim.api.nvim_set_keymap("n", "<leader>fs", "<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>", { noremap = true })
+-- map leader s to workbench.action.gotoSymbol
+vim.api.nvim_set_keymap("n", "<leader>s", "<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>", { noremap = true })
 
--- map leader fo to workbench.action.openRecent
-vim.api.nvim_set_keymap("n", "<leader>fo", "<cmd>call VSCodeNotify('workbench.action.openRecent')<cr>", { noremap = true })
+-- map leader R to workbench.action.openRecent
+vim.api.nvim_set_keymap("n", "<leader>r", "<cmd>call VSCodeNotify('workbench.action.openRecent')<cr>", { noremap = true })
 
--- map leader fn to workbench.action.quickSwitchWindow
-vim.api.nvim_set_keymap("n", "<leader>fn", "<cmd>call VSCodeNotify('workbench.action.quickSwitchWindow')<cr>", { noremap = true })
+-- map leader b to workbench.action.quickOpenLeastRecentlyUsedEditor
+vim.api.nvim_set_keymap("n", "<leader>b", "<cmd>call VSCodeNotify('workbench.action.showEditorsInActiveGroup')<cr>", { noremap = true })
 
-  -- map leader fw to workbench.action.findInFiles
-vim.api.nvim_set_keymap("n", "<leader>fw", "<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>", { noremap = true })
+-- map leader j to workbench.action.switchWindow
+vim.api.nvim_set_keymap("n", "<leader>j", "<cmd>call VSCodeNotify('workbench.action.switchWindow')<cr>", { noremap = true })
+
+-- map leader W to workbench.action.findInFiles
+vim.api.nvim_set_keymap("n", "<leader>W", "<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>", { noremap = true })
+
+-- map leader n to workbench.action.newWindow
+vim.api.nvim_set_keymap("n", "<leader>n", "<cmd>call VSCodeNotify('workbench.action.newWindow')<cr>", { noremap = true })
+
+-- map leader al to turboConsoleLog.displayLogMessage
+vim.api.nvim_set_keymap("n", "<leader>al", "<cmd>call VSCodeNotify('turboConsoleLog.displayLogMessage')<cr>", { noremap = true })
+
+
+-- map leader m to :lua require('treesj').split()
+-- vim.api.nvim_set_keymap("n", "<leader>m", "<cmd>lua require('treesj').split()<cr>", { noremap = true })
+vim.keymap.set('n', '<leader>m', require('treesj').toggle)
+vim.keymap.set('n', '<leader>M', function()
+    require('treesj').toggle({ split = { recursive = true } })
+end)
 
 
 -- visual mode
-vim.api.nvim_set_keymap("v", "x", "$h%", { noremap = true })
 vim.keymap.set("v", "gc",
   function ()
     -- run gc
@@ -517,3 +612,27 @@ vim.keymap.set("v", "gc",
     combo("<Esc>")
   end
   ,opts)
+  
+  
+  -- jump to }
+vim.keymap.set("v", "{",
+  function ()
+    combo("g_%")
+  end
+  ,opts)
+  
+  -- jump last char
+vim.keymap.set("v", "x",
+  function ()
+    combo("g_")
+  end
+  ,opts)
+  
+  -- surround with ( word )
+vim.keymap.set("n", "y(",
+  function ()
+    combo("ysiw(")
+  end
+  ,opts)
+
+-- vim.api.nvim_set_keymap("v", "ga", "%V", { noremap = true })
