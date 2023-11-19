@@ -1,4 +1,4 @@
-# Hello sk
+# Hello sk -> AstroNvim
 
 this is your AstroNvim config
 
