@@ -1,4 +1,8 @@
 if vim.g.vscode then
+
+
+
+
   -- packer.nvim configuration
   -- Ensure the plugin manager is initialized
   -- You can modify the installation path if desired
@@ -32,7 +36,13 @@ if vim.g.vscode then
       use 'ThePrimeagen/harpoon'
       use 'tpope/vim-surround'
       use 'tommcdo/vim-exchange'
-
+      use({
+        'Wansmer/treesj',
+        requires = { 'nvim-treesitter/nvim-treesitter' },
+        config = function()
+          require('treesj').setup({--[[ your config ]]})
+        end,
+      })
     --   use({
     --     "kylechui/nvim-surround",
     --     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
