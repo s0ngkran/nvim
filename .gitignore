@@ -3,7 +3,6 @@
 colors/*
 docs
 ginit.vim
-lua/user
 plugin
 ftplugin
 spell
@@ -47,3 +46,6 @@ tags
 dart.dart
 aaa.js
 pack
+lua/user/temp.dart
+lua/user/temp.js
+lua/user/test.temp

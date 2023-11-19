@@ -1,0 +1,15 @@
+{
+  "sn": {
+    "prefix": ["sn"],
+    "body": [
+      "\"${1: snippet}\": {",
+      " \"prefix\": [\"${1: snippet}\"],",
+      "\"body\": [",
+      "$2",
+      "],",
+      "\"description\": \"$1 sk\"",
+      "}"
+    ],
+    "description": "snippet"
+  }
+}
