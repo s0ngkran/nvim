@@ -1,0 +1,103 @@
+{
+  "tds": {
+    "prefix": ["tds"],
+    "body": ["// TODO: @s0ngkran"],
+    "description": "// TODO: @s0ngkran: "
+  },
+  "tdo": {
+    "prefix": ["tdo"],
+    "body": ["// TODO: @Ozarkk191: "],
+    "description": "tdo sk"
+  },
+  "tdp": {
+    "prefix": ["tdp"],
+    "body": ["// TODO: @PENGKIE: "],
+    "description": "tdp sk"
+  },
+  "tdy": {
+    "prefix": ["tdy"],
+    "body": ["// TODO: @yMzThai: "],
+    "description": "tdy sk"
+  },
+  "tdy": {
+    "prefix": ["tdm"],
+    "body": ["// TODO: @Mr.Puttipong: "],
+    "description": "tdy sk"
+  },
+  "ctl": {
+    "prefix": ["ctl"],
+    "body": [
+      "  import 'package:get/get.dart';",
+      "  import 'package:pengkie_utility/core.dart';",
+      "  class $1Ctl extends GetxController {",
+      "	  static $1Ctl get to => Get.find();",
+      "	  var dummy = ''.obs;",
+      "	  @override",
+      "	  void onInit() {",
+      "		  super.onInit();",
+      "     '$1Ctl.onInit()'.logg;",
+      "   }",
+      "  }"
+    ],
+    "description": "ctl sk"
+  },
+  "stl": {
+    "prefix": ["stl"],
+    "body": [
+      "import 'package:flutter/material.dart'; ",
+      "import 'package:pengkie_utility/core.dart';",
+      "import 'package:get/get.dart';",
+      "import '../modules.dart';",
+      "import '../../shared/my_view.dart';",
+      "",
+      "class $1Scr extends Hoo<$1Ctl> {",
+      "const $1Scr({super.key});",
+      "",
+      "@override",
+      "Widget build(BuildContext context) {",
+      "    return Scaffold(",
+      "        appBar: AppBar(",
+      "            title: const Text('$1Scr'),",
+      "        ),",
+      "        body: SingleChildScrollView(",
+      "            child: Column(",
+      "                children: [",
+      "                  '$1Scr'.h1,",
+      "                  'clickme'.btn(() {",
+      "                      'hello $1Scr'.di;",
+      "                  })",
+      "                ],",
+      "            ),",
+      "        ),",
+      "      );",
+      "   }",
+      "}"
+    ],
+    "description": "stlsk"
+  },
+
+  "stll": {
+    "prefix": ["stll"],
+    "body": [
+      "import 'package:flutter/material.dart'; ",
+      "import 'package:pengkie_utility/core.dart';",
+      "import 'package:get/get.dart';",
+      "",
+      "class $1Widget extends StatelessWidget {",
+      "const $1Widget({super.key});",
+      "",
+      "@override",
+      "Widget build(BuildContext context) {",
+      " return Column(",
+      "     children: [",
+      "       '$1'.h1,",
+      "       'clickme'.btn(() {",
+      "           'hello $1'.di;",
+      "      })",
+      "    ]);",
+      "   }",
+      "}"
+    ],
+    "description": "stlsk"
+  }
+}
