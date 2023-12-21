@@ -49,7 +49,7 @@ maps.n["<leader>pl"] = { "<cmd>AstroChangelog<cr>", desc = "AstroNvim Changelog"
 maps.n["<leader>c"] = { function() require("astronvim.utils.buffer").close() end, desc = "Close buffer" }
 maps.n["<leader>C"] = { function() require("astronvim.utils.buffer").close(0, true) end, desc = "Force close buffer" }
 maps.n["]b"] =
-  { function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" }
+{ function() require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" }
 maps.n["[b"] = {
   function() require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1)) end,
   desc = "Previous buffer",
@@ -65,7 +65,7 @@ maps.n["<b"] = {
 
 maps.n["<leader>b"] = sections.b
 maps.n["<leader>bc"] =
-  { function() require("astronvim.utils.buffer").close_all(true) end, desc = "Close all buffers except current" }
+{ function() require("astronvim.utils.buffer").close_all(true) end, desc = "Close all buffers except current" }
 maps.n["<leader>bC"] = { function() require("astronvim.utils.buffer").close_all() end, desc = "Close all buffers" }
 maps.n["<leader>bb"] = {
   function()
@@ -82,13 +82,13 @@ maps.n["<leader>bd"] = {
   desc = "Close buffer from tabline",
 }
 maps.n["<leader>bl"] =
-  { function() require("astronvim.utils.buffer").close_left() end, desc = "Close all buffers to the left" }
+{ function() require("astronvim.utils.buffer").close_left() end, desc = "Close all buffers to the left" }
 maps.n["<leader>br"] =
-  { function() require("astronvim.utils.buffer").close_right() end, desc = "Close all buffers to the right" }
+{ function() require("astronvim.utils.buffer").close_right() end, desc = "Close all buffers to the right" }
 maps.n["<leader>bs"] = sections.bs
 maps.n["<leader>bse"] = { function() require("astronvim.utils.buffer").sort "extension" end, desc = "By extension" }
 maps.n["<leader>bsr"] =
-  { function() require("astronvim.utils.buffer").sort "unique_path" end, desc = "By relative path" }
+{ function() require("astronvim.utils.buffer").sort "unique_path" end, desc = "By relative path" }
 maps.n["<leader>bsp"] = { function() require("astronvim.utils.buffer").sort "full_path" end, desc = "By full path" }
 maps.n["<leader>bsi"] = { function() require("astronvim.utils.buffer").sort "bufnr" end, desc = "By buffer number" }
 maps.n["<leader>bsm"] = { function() require("astronvim.utils.buffer").sort "modified" end, desc = "By modification" }
@@ -159,17 +159,44 @@ end
 
 -- NeoTree
 if is_available "neo-tree.nvim" then
-  maps.n["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
-  maps.n["<leader>o"] = {
+  -- maps.n["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
+  maps.n["<leader>e"] = {
+    --  call "<cmd>Neotree position=float<cr>"
     function()
-      if vim.bo.filetype == "neo-tree" then
-        vim.cmd.wincmd "p"
+      if vim.bo.filetype ~= "neo-tree" then
+        -- vim.cmd.Neotree "toggle"
+        vim.cmd('Neotree position=float')
       else
-        vim.cmd.Neotree "focus"
+        vim.cmd.wincmd "p"
       end
-    end,
-    desc = "Toggle Explorer Focus",
+    end
+    ,
+    desc = "Toggle Explorer"
   }
+  maps.n["<leader>E"] = {
+    --  call "<cmd>Neotree position=float<cr>"
+    function()
+      if vim.bo.filetype ~= "neo-tree" then
+        -- vim.cmd.Neotree "toggle"
+        local currentFileDirPath = vim.fn.expand('%:p:h')
+        vim.cmd('Neotree position=float dir=' .. currentFileDirPath)
+      else
+        vim.cmd.wincmd "p"
+      end
+    end
+    ,
+    desc = "Toggle Explorer CurrentFile"
+  }
+  -- maps.n["<leader>o"] = {
+  --   function()
+  --     if vim.bo.filetype == "neo-tree" then
+  --       vim.cmd.wincmd "p"
+  --     else
+  --       vim.cmd.Neotree "focus"
+  --     end
+  --   end,
+  --   desc = "Toggle Explorer Focus",
+  -- }
 end
 
 -- Session Manager
@@ -180,7 +207,7 @@ if is_available "neovim-session-manager" then
   maps.n["<leader>Sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" }
   maps.n["<leader>Sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions" }
   maps.n["<leader>S."] =
-    { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
+  { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
 end
 if is_available "resession.nvim" then
   maps.n["<leader>S"] = sections.S

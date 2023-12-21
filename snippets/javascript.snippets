@@ -5,6 +5,13 @@ snippet he
 snippet ll
 	console.log(\`xxx->$CLIPBOARD \${$CLIPBOARD}\`);
 
+snippet ag
+  aggregate([
+    {
+     ${1}
+    }
+  ]).toArray();
+
 snippet l
 	console.log(\`${1}\`);
 
@@ -372,11 +379,11 @@ snippet fun*
 		${0:${VISUAL}}
 	}
 snippet cf
-	const ${1:function_name} = (${2}) => {
+	const $CLIPBOARD = async (${2}) => {
 		${0:${VISUAL}}
 	}
-snippet cfa
-	const ${1:function_name} = async (${2}) => {
+snippet cff
+	const $CLIPBOARD = (${2}) => {
 		${0:${VISUAL}}
 	}
 snippet caf
