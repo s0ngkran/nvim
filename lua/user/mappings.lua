@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined_method, undefined_method, undefined_method, undefined_identifier, undefined_method, undefined_method, undefined_method, undefined_method
 -- Mapping data with "desc" stored directly by vim.keymap.set().
 --
 -- Please use this mappings table to set keyboard mapping since this is the
@@ -116,13 +117,15 @@ return {
         -- call code action menu
         require('code_action_menu').open_code_action_menu()
         -- await until code action menu is open then require('hop').hint_char1()
+        ---@diagnostic disable-next-line: undefined-global
         -- vim.defer_fn(function()
-        --   require('hop').hint_char1()
-        -- end, 100)
-        combo('jjj')
+          -- require('hop').hint_char1()
+          combo('jjj')
+        -- end, 350)
       end,
       desc = "Code Action",
     },
+
     -- [",r"] = {
     --   test()
     --     -- open reference for current symbol
@@ -246,11 +249,9 @@ return {
     -- ["<leader>fR"] = { "<cmd>Telescope repo<CR>", desc = "Telescope repo" },
     ["<leader>aad"] = { "<cmd>e ~/.config/nvim/snippets/dart.snippets<CR>", desc = "dart snippets" },
     ["<leader>aaj"] = { "<cmd>e ~/.config/nvim/snippets/javascript.snippets<CR>", desc = "js snippets" },
-
-
     ["<leader>aar"] = {
-      function ()
-         require("luasnip.loaders.from_snipmate").load({ path = { "~/.config/nvim/snippets/" } })
+      function()
+        require("luasnip.loaders.from_snipmate").load({ path = { "~/.config/nvim/snippets/" } })
       end,
       desc = "reload all snippets"
     },
@@ -269,7 +270,7 @@ return {
         local word = vim.fn.expand("<cword>")
 
         -- paste to next line in this pattern "console.log(' 🧪 xxx----->word', JSON.stringify(word, null, 2));"; without using combo()
-        vim.cmd("normal oconsole.log(' 🧪 xxx-----> " .. word  )
+        vim.cmd("normal oconsole.log(' 🧪 xxx-----> " .. word)
       end
       , desc = "js log" },
     ["<leader>vv"] = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", desc = "mapping nvim" },
@@ -330,6 +331,10 @@ return {
     -- map leader a t v to terminal
     -- ["<leader>t"] = { "<cmd>terminal<CR>", desc = "terminal v" },
 
+    ["<leader>k"] = {
+      function()
+        combo('<leader>dh')
+      end, desc = "debug hover" },
     ["<leader>an"] = {
       function()
         -- run command tn on zsh
@@ -363,8 +368,10 @@ return {
     },
     -- map leader w h to swap window to left
     ["<leader>wh"] = { "<C-w>h", desc = "swap window to left" },
-    ["L"] = { ":bnext<CR>", desc = "bnext" },
-    ["H"] = { ":bprevious<CR>", desc = "bprevious" },
+    -- ["L"] = { ":bnext<CR>", desc = "bnext" },
+    -- ["H"] = { ":bprevious<CR>", desc = "bprevious" },
+    ["L"] = { ":tabnext<CR>", desc = "bnext" },
+    ["H"] = { ":tabprevious<CR>", desc = "bprevious" },
     -- leader h n to split vertical window
     -- hoo
     ["gH"] = { ':lua require("harpoon.mark").add_file()<CR>', desc = "harpoon add_file" },
@@ -397,6 +404,13 @@ return {
     ['<leader>amp'] = {
       function()
         vim.cmd(":put =expand('%:p')")
+      end, desc = "full_path",
+    },
+    ['<leader>amx'] = {
+      function()
+        -- vim.cmd(":put =expand('%:p')")
+        local current_path = vim.fn.expand("%:p")
+        vim.notify(current_path)
       end, desc = "full_path",
     },
     -- use <C-r>% instead
@@ -500,6 +514,78 @@ return {
       end,
       desc = "yank line"
     },
+    ['cl'] = {
+      function()
+        combo('crr')
+      end,
+      desc = 'change line'
+    },
+    ['cw'] = {
+      function()
+        combo('cirw')
+      end,
+      desc = 'change word'
+    },
+    ['cb'] = {
+      function()
+        combo('cirb')
+      end,
+      desc = 'change ()'
+    },
+    ['cB'] = {
+      function()
+        combo('cirB')
+      end,
+      desc = 'change {}'
+    },
+    ["c'"] = {
+      function()
+        combo("cir'")
+      end,
+      desc = 'change \''
+    },
+    ['c"'] = {
+      function()
+        combo('cir"')
+      end,
+      desc = 'change "'
+    },
+    ['dl'] = {
+      function()
+        combo('drr')
+      end,
+      desc = 'delete line'
+    },
+    ['dw'] = {
+      function()
+        combo('dirw')
+      end,
+      desc = 'delete word'
+    },
+    ['db'] = {
+      function()
+        combo('dirb')
+      end,
+      desc = 'delete ()'
+    },
+    ['dB'] = {
+      function()
+        combo('dirB')
+      end,
+      desc = 'delete {}'
+    },
+    ["d'"] = {
+      function()
+        combo("dir'")
+      end,
+      desc = 'delete \''
+    },
+    ['d"'] = {
+      function()
+        combo('dir"')
+      end,
+      desc = 'delete "'
+    },
     ['<leader>aaa'] = {
       function()
         -- call :VimwikiToggleListItem using cmd
@@ -523,6 +609,60 @@ return {
       desc = "toggle list"
     },
     [';'] = { ':', desc = "enter command mode" },
+    ['<leader>dd'] = {
+      function()
+        -- local current_bufnr = vim.fn.bufnr()
+        -- combo('<leader>dQ<leader>dB<leader>wm<leader>db<leader>dc')
+        -- -- delay
+        -- vim.defer_fn(function()
+        --   combo('<C-h>')
+        --   combo('<leader>wm')
+        -- end, 350)
+        -- vim.cmd("buffer " .. current_bufnr)
+        -- combo('<leader>dQ<leader>dB')
+        combo('<leader>dc')
+        vim.defer_fn(function()
+          combo('<leader>du')
+        end, 300)
+      end,
+      desc = "debug current line"
+    },
+    ['<leader>bb'] = {
+      function()
+        local dir = vim.fn.expand("%:p:h:h")
+        -- move down 1 line using vim.cmd
+        -- combo('<leader>bn')
+        -- neotree set root with dir
+        -- using Neotree dir=...
+        vim.cmd('tabnew')
+        vim.cmd("Neotree dir=" .. dir .. " position=float")
+        -- quit neotree using cmd
+        -- vim.cmd('Neotree close')
+        -- delay 1 sec then quit
+        vim.defer_fn(function()
+          vim.cmd('Neotree close')
+        end, 100)
+
+        vim.defer_fn(function()
+          vim.cmd('Telescope find_files')
+        end, 200)
+      end,
+      desc = "new root"
+    },
+    -- ['>'] = {
+    --   function()
+    --     -- indent line
+    --     vim.cmd("normal! >>")
+    --   end,
+    --   desc = "indent"
+    -- },
+    -- ['<'] = {
+    --   function()
+    --     -- indent line
+    --     vim.cmd("normal! <<")
+    --   end,
+    --   desc = "indent"
+    -- },
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
 
@@ -556,11 +696,11 @@ return {
     --     desc = "replace });"
     --   },
     ------------------------------------------------------------
+
   },
   i = {
     -- type jk to go to the last of line like $
     ["jk"] = { "<esc>A", desc = "go to the last of line" }, -- this key is not working
-    [">"] = { ">gv", desc = "indent" }, -- this key is not working
     -- ["<Tab>"] = function()
     --   if require("copilot.suggestion").is_visible() then
     --     require("copilot.suggestion").accept()
@@ -612,8 +752,8 @@ return {
       desc = "last char, line",
     },
     ['X'] = {
-      function ()
-          combo("g_%")
+      function()
+        combo("g_%")
       end,
       desc = 'last char, last'
     },
