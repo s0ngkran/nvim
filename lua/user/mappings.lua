@@ -12,6 +12,8 @@ return {
 
   n = {
     -- leader f to find all files
+    ["<leader>vm"] = { "<cmd>tabnew ~/.config/nvim/lua/user/mappings.lua<CR>", desc = "mapping nvim" },
+    ["<leader>as"] = { "<cmd>AstroReload<cr>", desc = "Astronvim Reload" },
     ["<leader>f"] = {
       "<cmd>Telescope find_files<cr>", desc = "Find File",
     },
@@ -46,7 +48,6 @@ return {
     -- ["<leader>aord"] = { "<cmd>Octo review discard<cr>", desc = "Octo review discard" },
     -- ["<leader>aorc"] = { "<cmd>Octo review close<cr>", desc = "Octo review close" },
     -- ["<leader>aopc"] = { "<cmd>Octo pr create<cr>", desc = "Octo pr create" },
-    ["<leader>as"] = { "<cmd>AstroReload<cr>", desc = "Astronvim Reload" },
     -- ["<leader><leader>"] = { '<C-w>w', desc = "switch window" },
     ["<leader>ae"] = {
       function()
@@ -274,7 +275,6 @@ return {
       end
       , desc = "js log" },
     ["<leader>vv"] = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", desc = "mapping nvim" },
-    ["<leader>vm"] = { "<cmd>tabnew ~/.config/nvim/lua/user/mappings.lua<CR>", desc = "mapping nvim" },
     -- ["<leader>vg"] = { "<cmd>e ../../../README.groovy<CR>", desc = "groovy" },
     ["<leader>vj"] = { "<cmd>vs ~/.config/nvim/lua/user/plugins/user.lua<CR>", desc = "plugin nvim" },
     -- map leader j to telescope search command

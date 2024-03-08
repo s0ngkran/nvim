@@ -169,15 +169,24 @@ vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>call VSCodeNotify('git-graph.vi
 
 -- map leader gc to workbench.action.terminal.newWithCwd
 vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>call VSCodeNotify('workbench.action.terminal.newWithCwd')<cr>", { noremap = true })
+-- unmap gcc
+-- vim.api.nvim_set_keymap("n", "gcc", "<nop>")
+-- vim.api.nvim_set_keymap("n", "gc", "<cmd>call VSCodeNotify('editor.action.commentLine')<cr>", { noremap = true })
+-- vim.api.nvim_set_keymap("v", "gc", "<cmd>call VSCodeNotify('editor.action.commentLine')<cr>", { noremap = true })
 
 -- map leader gk to workbench.action.terminal.killAll
 vim.api.nvim_set_keymap("n", "<leader>gk", "<cmd>call VSCodeNotify('workbench.action.terminal.killAll')<cr>", { noremap = true })
 
--- map leader gj to multiCommand.openTerminalForCurrentFile
 vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>call VSCodeNotify('multiCommand.openTerminalForCurrentFile')<cr>", { noremap = true })
+-- vim.keymap.set("n", "<leader>t",
+--   function ()
+--     vim.cmd('call VSCodeNotify("multiCommand.openTerminalForCurrentFile")')
+--   end
+--   ,opts)
 
 -- map leader gd to gitlens.diffWithPrevious
 vim.api.nvim_set_keymap("n", "gt", "<cmd>call VSCodeNotify('gitlens.diffWithPrevious')<cr>", { noremap = true })
+
 
 
 
@@ -203,6 +212,16 @@ vim.keymap.set("n", "<leader>c",
   end
   ,opts)
 
+vim.keymap.set("v", "x",
+  function ()
+          combo("g_")
+  end
+  ,opts)
+vim.keymap.set("v", "X",
+  function ()
+          combo("g_%")
+  end
+  ,opts)
 -- map \ to workbench.action.splitEditorRight
 vim.api.nvim_set_keymap("n", "\\", "<cmd>call VSCodeNotify('workbench.action.splitEditorRight')<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "|", "<cmd>call VSCodeNotify('workbench.action.splitEditorDown')<cr>", { noremap = true })
@@ -238,7 +257,7 @@ vim.api.nvim_set_keymap("n", "zk", "H", { noremap = true })
 
 
 --- map gc in normal mode as editor.action.commentLine
-vim.api.nvim_set_keymap("n", "gc", "<cmd>call VSCodeNotify('editor.action.commentLine')<cr>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "gc", "<cmd>call VSCodeNotify('editor.action.commentLine')<cr>", { noremap = true })
 
 
 vim.keymap.set("n", "gr",
@@ -401,7 +420,7 @@ vim.api.nvim_set_keymap("n", "gm", "<cmd>call VSCodeNotify('vscode-harpoon.addEd
 vim.api.nvim_set_keymap("n", "gh", "<cmd>call VSCodeNotify('vscode-harpoon.editorQuickPick')<cr>", { noremap = true })
 
 -- terminal
--- vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<cr>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>call VSCodeNotify('workbench.action.createTerminalEditor')<cr>", { noremap = true })
 
 
 -- map leader wl to workbench.action.moveActiveEditorGroupRight
@@ -425,7 +444,9 @@ vim.keymap.set("n", "yd",
     combo("diwhyirw")
   end
   ,opts)
-
+  
+  --- combotest
+  
 -- map leap spooky yir
 vim.keymap.set("n", "yw",
   function ()
@@ -457,6 +478,7 @@ vim.keymap.set("n", 'yl',
     combo('yrr')
   end
   ,opts)
+
 
 -- map leap spooky cim
 vim.keymap.set("n", "cw",

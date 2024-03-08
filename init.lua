@@ -36,6 +36,12 @@ if vim.g.vscode then
       use 'ThePrimeagen/harpoon'
       use 'tpope/vim-surround'
       use 'tommcdo/vim-exchange'
+      use({ 
+        'tpope/vim-commentary',
+        config = function()
+          -- not working for vscode now
+        end,
+      })
       use({
         'Wansmer/treesj',
         requires = { 'nvim-treesitter/nvim-treesitter' },

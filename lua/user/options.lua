@@ -41,6 +41,10 @@ return function(local_vim)
   -- set no swap file
   local_vim.opt.swapfile = false
 
+
+  -- node
+  local_vim.g.nodeinspect_start_repl = 0
+
   local_vim.g.instant_username = "SK-client"
   -- local_vim.g.UltiSnipsEnableSnipMate = 1
   -- local_vim.g.UltiSnipsSnippetDirectories = { 'UltiSnips' }
@@ -72,6 +76,7 @@ return function(local_vim)
   -- local_vim.g.github_enterprise_urls = { 'https://github.com/PENGKIE/consumer' }
   local_vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' } -- removing option from list
   local_vim.opt.shortmess = vim.opt.shortmess + { I = true } -- add to option list
+
 
   return local_vim
 end

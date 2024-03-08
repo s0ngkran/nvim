@@ -51,6 +51,7 @@ return {
       "pyright",
       -- install "dartls" and config lineLength to 120
       "dartls", -- { "dartls", config = { lineLength = 120 } },
+      "gopls"
     },
     -- ["server-settings"] = {
     --   dartls = {
@@ -84,6 +85,28 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
+    -- unmap >> for normal mode
+    vim.api.nvim_set_keymap("n", ">>", "<nop>", { noremap = true, silent = true })
+
+    -- local dap = require('dap')
+    -- config for js
+    -- dap.adapters.node2 = {
+    --   type = 'executable',
+    --   command = 'node',
+    --   args = {os.getenv('HOME') .. '/.local/share/nvim/dapinstall/jsnode_dbg/vscode-node-debug2/out/src/nodeDebug.js'},
+    -- }
+    -- dap.configurations.javascript = {
+    --   {
+    --     type = 'node2',
+    --     request = 'launch',
+    --     program = '${file}',
+    --     cwd = vim.fn.getcwd(),
+    --     sourceMaps = true,
+    --     protocol = 'inspector',
+    --     console = 'integratedTerminal',
+    --   },
+    -- }
+
     -- lua, default settings
     -- require("luasnip.loaders.from_snipmate").lazy_load({ paths = { "./lua/user/snippets" } })
     -- vim.api.nvim_set_keymap("n", "<leader>am", ":MinimapToggle<CR>", {})
@@ -100,6 +123,8 @@ return {
     -- vim.keymap.set("n", "<leader>S", function()
     --   require("easy-action").base_easy_action("i", nil, "InsertLeave")
     -- end, opts)
+
+    -- set up neotree position to float
 
 
     -- set auto select first suggest
