@@ -17,8 +17,8 @@ return {
     ["<leader>f"] = {
       "<cmd>Telescope find_files<cr>", desc = "Find File",
     },
-    ["<leader>w"] = {
-      "<cmd>Telescope live_grep<cr>", desc = "Find File",
+    ["<leader>W"] = {
+      "<cmd>Telescope live_grep<cr>", desc = "Find Word",
     },
     -- second key is the lefthand side of the map
     -- mappings seen under group name "Buffer"
@@ -160,15 +160,18 @@ return {
     -- ["<leader>m"] = {
     --   ":e#<CR>", desc = "go to previous file"
     -- },
-    ["<leader>m"] = { "<cmd>tabNext<cr>", desc = "tab next" },
+    ["<leader>m"] = { "<cmd>tabnext<cr>", desc = "tab next" },
+    ["<leader>M"] = { "<cmd>tabNext<cr>", desc = "tab previous" },
+    ["<leader>x"] = { "<cmd>qa!<cr>", desc = "kill all windows" },
+    ["<leader>c"] = { "<cmd>tabclose<cr>", desc = "kill all windows" },
     -- ["-N"] = { '*N', desc = "show same word" },
     -- ["-n"] = { '*', desc = "next same word" },
     ["<leader>ge"] = { "<cmd>Gitsigns next_hunk<cr>", desc = "next hunk" },
     ["-D"] = { "<cmd>Gitsigns prev_hunk<cr>", desc = "prev hunk" },
     ["<leader>gP"] = { "<cmd>Git pull origin main<cr>", desc = "pull from main" },
     --- key binding
-    -- ["H"] = { "0", desc = "go to first char" },
-    -- ["L"] = { "$", desc = "go to last char" },
+    ["H"] = { "0", desc = "go to first char" },
+    ["L"] = { "$", desc = "go to last char" },
 
     -- ga to $%
     -- ["ga"] = { "$h%", desc = "last then %" },
@@ -278,7 +281,6 @@ return {
     -- ["<leader>vg"] = { "<cmd>e ../../../README.groovy<CR>", desc = "groovy" },
     ["<leader>vj"] = { "<cmd>vs ~/.config/nvim/lua/user/plugins/user.lua<CR>", desc = "plugin nvim" },
     -- map leader j to telescope search command
-    -- ["<leader>W"] = { "<cmd>Telescope live_grep<CR>", desc = "find word" },
     ["<leader>ww"] = {
       function()
         -- go to ~/projects/daily/index.md
@@ -313,7 +315,7 @@ return {
     --     -- split terminal to right
     --     combo('<C-w>h')
     --   end, desc = "wind equal" },
-    -- map F1 to Telescope commands
+    -- map F1 to Telescope commands; find command
     ["<F1>"] = { "<cmd>Telescope commands<CR>", desc = "Telescope commands" },
     -- map ga to back to previous file
     ["ga"] = { "<cmd>e#<CR>", desc = "previous file" },
@@ -370,8 +372,8 @@ return {
     ["<leader>wh"] = { "<C-w>h", desc = "swap window to left" },
     -- ["L"] = { ":bnext<CR>", desc = "bnext" },
     -- ["H"] = { ":bprevious<CR>", desc = "bprevious" },
-    ["L"] = { ":tabnext<CR>", desc = "bnext" },
-    ["H"] = { ":tabprevious<CR>", desc = "bprevious" },
+    -- ["L"] = { ":tabnext<CR>", desc = "bnext" },
+    -- ["H"] = { ":tabprevious<CR>", desc = "bprevious" },
     -- leader h n to split vertical window
     -- hoo
     ["gH"] = { ':lua require("harpoon.mark").add_file()<CR>', desc = "harpoon add_file" },
