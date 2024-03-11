@@ -252,10 +252,19 @@ return {
     -- ["<leader>al"] = { "<cmd>FlutterLspRestart<CR>", desc = "Telescope repo" },
     -- ["<leader>fR"] = { "<cmd>Telescope repo<CR>", desc = "Telescope repo" },
     ["<leader>aad"] = { "<cmd>e ~/.config/nvim/snippets/dart.snippets<CR>", desc = "dart snippets" },
+
+
     ["<leader>aaj"] = { "<cmd>e ~/.config/nvim/snippets/javascript.snippets<CR>", desc = "js snippets" },
     ["<leader>aar"] = {
       function()
         require("luasnip.loaders.from_snipmate").load({ path = { "~/.config/nvim/snippets/" } })
+      end,
+      desc = "reload all snippets"
+    },
+    -- README.md preview
+    ["<leader>aap"] = {
+      function()
+        local result = vim.fn.systemlist("grip&; open http://localhost:6419")
       end,
       desc = "reload all snippets"
     },
