@@ -259,6 +259,16 @@ return {
       end,
       desc = "reload all snippets"
     },
+    -- latex
+    ["<leader>aac"] = {
+      function()
+        -- run bibtex main.tex
+        -- run pdflatex main.tex
+        -- run pdflatex main.tex
+        local result = vim.fn.systemlist("pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex; open main.pdf")
+      end,
+      desc = "reload all snippets"
+    },
     ["<leader>al"] = {
       function()
         -- copy current word at cursor
@@ -425,6 +435,13 @@ return {
       function()
         vim.cmd(":put =expand('%:p:h')")
       end, desc = "file_dir",
+    },
+    ['<leader>o'] = {
+      function()
+        -- vim.cmd(":put =expand('%:p:h')")
+        -- neotree current file
+        vim.cmd("Neotree dir=" .. vim.fn.expand("%:p:h") .. " position=float")
+      end, desc = "neotree current file",
     },
     ['<leader>amt'] = {
       function()
