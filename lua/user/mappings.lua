@@ -7,9 +7,19 @@
 local combo = function(str)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(str, true, false, true), 'm', true)
 end
+
+-- MARKS
+-- Remap lowercase marks to uppercase marks
+for c = string.byte('a'), string.byte('z') do
+    local char = string.char(c)
+    -- ma to mA
+    -- 'a to `A
+    vim.api.nvim_exec("nnoremap m" .. char .. " m" .. string.upper(char), false)
+    vim.api.nvim_exec("nnoremap '" .. char .. " `" .. string.upper(char), false)
+end
+
 return {
   -- first key is the mode
-
   n = {
     -- leader f to find all files
     ["<leader>vm"] = { "<cmd>tabnew ~/.config/nvim/lua/user/mappings.lua<CR>", desc = "mapping nvim" },
@@ -163,6 +173,7 @@ return {
     ["<leader>m"] = { "<cmd>tabnext<cr>", desc = "tab next" },
     ["<leader>M"] = { "<cmd>tabNext<cr>", desc = "tab previous" },
     ["<leader>x"] = { "<cmd>qa!<cr>", desc = "kill all windows" },
+    ["<leader>bx"] = { "<cmd>%bd<cr>", desc = "kill all windows" },
     ["<leader>c"] = { "<cmd>tabclose<cr>", desc = "kill all windows" },
     -- ["-N"] = { '*N', desc = "show same word" },
     -- ["-n"] = { '*', desc = "next same word" },
@@ -274,7 +285,7 @@ return {
         -- run bibtex main.tex
         -- run pdflatex main.tex
         -- run pdflatex main.tex
-        local result = vim.fn.systemlist("pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex; open main.pdf")
+        local result = vim.fn.systemlist("cd ~/projects/Research/pdf_classification_vs_paf; pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex; open main.pdf")
       end,
       desc = "reload all snippets"
     },
