@@ -25,6 +25,15 @@ end
 
 local opts = { silent = true, remap = false }
 
+-- MARKS
+-- Remap lowercase marks to uppercase marks
+for c = string.byte('a'), string.byte('z') do
+    local char = string.char(c)
+    -- ma to mA
+    -- 'a to `A
+    vim.api.nvim_exec("nnoremap m" .. char .. " m" .. string.upper(char), false)
+    vim.api.nvim_exec("nnoremap '" .. char .. " `" .. string.upper(char), false)
+end
 
 
 
