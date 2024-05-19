@@ -36,6 +36,10 @@ return {
     ["<leader>bt"] = { "<cmd>tabNext<cr>", desc = "tab next" },
     ["<leader>bc"] = { "<cmd>tabclose<cr>", desc = "tab close" },
     ["<leader>bT"] = { "<cmd>tabprevious<cr>", desc = "tab prev" },
+
+    -- ignore recorder
+    ["q"] = { "<cmd>!echo recorder is disabled<cr>", desc = "recorder" },
+
     ["<leader>bD"] = {
       function()
         require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
@@ -44,6 +48,15 @@ return {
         end)
       end,
       desc = "Pick to close",
+    },
+    ["<leader>bb"] = {
+      function()
+        require("astronvim.utils.status").heirline.buffer_picker(function(bufnr)
+          -- open that buffer
+          vim.cmd("buffer " .. bufnr)
+        end)
+      end,
+      desc = "Pick to open",
     },
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
@@ -263,6 +276,7 @@ return {
     -- ["<leader>al"] = { "<cmd>FlutterLspRestart<CR>", desc = "Telescope repo" },
     -- ["<leader>fR"] = { "<cmd>Telescope repo<CR>", desc = "Telescope repo" },
     ["<leader>aad"] = { "<cmd>e ~/.config/nvim/snippets/dart.snippets<CR>", desc = "dart snippets" },
+    ["<leader>aam"] = { "<cmd>e ~/.config/nvim/snippets/python.snippets<CR>", desc = "python snippets" },
 
 
     ["<leader>aaj"] = { "<cmd>e ~/.config/nvim/snippets/javascript.snippets<CR>", desc = "js snippets" },
@@ -271,6 +285,10 @@ return {
         require("luasnip.loaders.from_snipmate").load({ path = { "~/.config/nvim/snippets/" } })
       end,
       desc = "reload all snippets"
+    },
+    ["<leader>aag"] = {
+      "<cmd>!python data/boxplot.py<CR>",
+      desc = "run boxplot.py"
     },
     -- README.md preview
     ["<leader>aap"] = {
@@ -285,9 +303,24 @@ return {
         -- run bibtex main.tex
         -- run pdflatex main.tex
         -- run pdflatex main.tex
-        local result = vim.fn.systemlist("cd ~/projects/Research/pdf_classification_vs_paf; pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex; open main.pdf")
+        vim.cmd('echo "printing... no bib"')
+        local result = vim.fn.systemlist("cd ~/projects/Research/pdf_classification_vs_paf/up_mod; pdflatex main.tex; open main.pdf")
       end,
-      desc = "reload all snippets"
+      desc = "pdf build"
+    },
+    ["<leader>aaC"] = {
+      function()
+        -- run bibtex main.tex
+        -- run pdflatex main.tex
+        -- run pdflatex main.tex
+        vim.cmd('echo "printing..."')
+        local result = vim.fn.systemlist("cd ~/projects/Research/pdf_classification_vs_paf/up_mod; pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex; open main.pdf")
+      end,
+      desc = "pdf build with bib"
+    },
+    ["<leader>aat"] = {
+      "<cmd>!pdflatex ~/projects/Research/pdf_classification_vs_paf/main.tex<CR>",
+      desc = "show error pdflatex"
     },
     ["<leader>al"] = {
       function()
@@ -316,20 +349,47 @@ return {
         -- go to ~/projects/daily/index.md
         vim.cmd("vs ~/projects/daily/index.md")
       end, desc = "go to daily/index.md" },
-    ["<leader>wt"] = {
+    ["<leader>wd"] = {
       function()
-        -- go to ~/projects/daily/index.md
-        vim.cmd("vs ~/projects/dbdiagram/main.groovy")
-      end, desc = "go to daily/main.groovy" },
+        vim.cmd("vs ~/projects/daily/dev4geo.md")
+      end, desc = "go to ..." },
     ["<leader>wi"] = {
       function()
-        vim.cmd("vs ~/projects/songkarn/functions/conm/requirements_for_cart_system/index.md")
-      end, desc = "go to cart_system/index.md" },
+        vim.cmd("vs ~/projects/daily/diary/diary.md")
+      end, desc = "go diary index" },
+    ["<leader>wag"] = {
+      function()
+        vim.cmd("VimwikiDiaryGenerateLinks")
+      end, desc = "diary generate link" },
+    ["<leader>waa"] = {
+      function()
+        vim.cmd("VimwikiMakeDiaryNote")
+      end, desc = "diary make today" },
+    ["<leader>wan"] = {
+      function()
+        vim.cmd("VimwikiMakeTomorrowDiaryNote")
+      end, desc = "diary make next" },
+    ["<leader>wap"] = {
+      function()
+        vim.cmd("VimwikiMakeYesterdayDiaryNote")
+      end, desc = "diary make prev" },
+    ["<leader>wgn"] = {
+      function()
+        vim.cmd("VimwikiDiaryNextDay")
+      end, desc = "diary go next" },
+    ["<leader>wgp"] = {
+      function()
+        vim.cmd("VimwikiDiaryPrevDay")
+      end, desc = "diary go prev" },
+    ["<leader>wgc"] = {
+      function()
+        vim.cmd("Calendar")
+      end, desc = "go calendar" },
     ["<leader>wu"] = {
       function()
         -- go to ~/projects/daily/index.md
         vim.cmd("vs ~/projects/songkarn/utils.js")
-      end, desc = "go to songkarn/utils.js" },
+      end, desc = "go to ..." },
     ["<leader>wm"] = {
       function()
         local current_bufnr = vim.fn.bufnr()
@@ -666,7 +726,7 @@ return {
       end,
       desc = "debug current line"
     },
-    ['<leader>bb'] = {
+    ['<leader>bw'] = {
       function()
         local dir = vim.fn.expand("%:p:h:h")
         -- move down 1 line using vim.cmd
