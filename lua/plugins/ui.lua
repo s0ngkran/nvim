@@ -46,12 +46,12 @@ return {
     enabled = vim.g.icons_enabled,
     config = require "plugins.configs.lspkind",
   },
-  {
-    "rcarriga/nvim-notify",
-    init = function() require("astronvim.utils").load_plugin_with_func("nvim-notify", vim, "notify") end,
-    opts = { on_open = function(win) vim.api.nvim_win_set_config(win, { zindex = 1000 }) end },
-    config = require "plugins.configs.notify",
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   init = function() require("astronvim.utils").load_plugin_with_func("nvim-notify", vim, "notify") end,
+  --   opts = { on_open = function(win) vim.api.nvim_win_set_config(win, { zindex = 1000 }) end },
+  --   config = require "plugins.configs.notify",
+  -- },
   {
     "stevearc/dressing.nvim",
     init = function() require("astronvim.utils").load_plugin_with_func("dressing.nvim", vim.ui, { "input", "select" }) end,
