@@ -90,47 +90,48 @@ return {
       }
     end,
   },
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    lazy = false,
-    event = "InsertEnter",
-    config = function()
-      require('copilot').setup({
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 200,
-          keymap = {
-            -- accept = "<S-CR>",
-            accept = "<C-x><C-x>j",
-            accept_word = false,
-            accept_line = false,
-            -- next = "<leader>j",
-            -- prev = "<leader>k",
-            -- dismiss = "<leader>c",
-          },
-        },
-        filetypes = {
-          dart = true,
-          js = true,
-          javascript = true,
-          lua = true,
-          yaml = true,
-          markdown = true,
-          help = true,
-          gitcommit = true,
-          gitrebase = false,
-          hgcommit = false,
-          svn = false,
-          cvs = false,
-          ["."] = false,
-        },
-        copilot_node_command = 'node', -- Node.js version must be > 16.x
-        server_opts_overrides = {},
-      })
-    end,
-  },
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   cmd = "Copilot",
+  --   lazy = false,
+  --   event = "InsertEnter",
+  --   config = function()
+  --     require('copilot').setup({
+  --       suggestion = {
+  --         enabled = true,
+  --         auto_trigger = true,
+  --         debounce = 200,
+  --         keymap = {
+  --           -- accept = "<S-CR>",
+  --           accept = "<C-x><C-x>j",
+  --           accept_word = false,
+  --           accept_line = false,
+  --           -- next = "<leader>j",
+  --           -- prev = "<leader>k",
+  --           -- dismiss = "<leader>c",
+  --         },
+  --       },
+  --       filetypes = {
+  --         dart = true,
+  --         js = true,
+  --         python = true,
+  --         javascript = true,
+  --         lua = true,
+  --         yaml = true,
+  --         markdown = true,
+  --         help = true,
+  --         gitcommit = true,
+  --         gitrebase = false,
+  --         hgcommit = false,
+  --         svn = false,
+  --         cvs = false,
+  --         ["."] = false,
+  --       },
+  --       copilot_node_command = 'node', -- Node.js version must be > 16.x
+  --       server_opts_overrides = {},
+  --     })
+  --   end,
+  -- },
   {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
@@ -1101,6 +1102,44 @@ return {
     init = function()
       -- Use init for configuration, don't use the more common "config".
     end
-  }
+  },
+  -- jupyter
+  -- {
+  --   "goerz/jupytext.vim",
+  --   lazy = false,
+  -- },
+  -- https://github.com/meatballs/notebook.nvim
+  -- {
+  --   "meatballs/notebook.nvim",
+  --   lazy = false,
+  --   config = function()
+  --     require('notebook').setup {
+  --       -- Whether to insert a blank line at the top of the notebook
+  --       insert_blank_line = true,
+  --
+  --       -- Whether to display the index number of a cell
+  --       show_index = true,
+  --
+  --       -- Whether to display the type of a cell
+  --       show_cell_type = true,
+  --
+  --       -- Style for the virtual text at the top of a cell
+  --       virtual_text_style = { fg = "lightblue", italic = true },
+  --     }
+  --   end,
+  -- },
+  {
+    "kiyoon/jupynium.nvim",
+    lazy = false,
+    -- build = "pip3 install --user .",
+    build = "conda run --no-capture-output -n jupynium pip install .",
+    -- enabled = vim.fn.isdirectory(vim.fn.expand "~/miniconda3/envs/jupynium"),
+    -- config to use "conda activate mytorch"
 
+  },
+  -- vim wiki calendar
+  {
+    "mattn/calendar-vim",
+    lazy = false,
+  }
 }
