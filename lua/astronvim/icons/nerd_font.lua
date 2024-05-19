@@ -26,7 +26,7 @@ return {
   FoldSeparator = " ",
   FolderClosed = "",
   FolderEmpty = "",
-  FolderOpen = "O-",
+  FolderOpen = "",
   Git = "󰊢",
   GitAdd = "",
   GitBranch = "",
