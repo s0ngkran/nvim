@@ -88,7 +88,8 @@ return {
   polish = function()
     -- unmap >> for normal mode
     vim.api.nvim_set_keymap("n", ">>", "<nop>", { noremap = true, silent = true })
-
+    require("neo-tree").setup({ filesystem = { window = { mappings = { ["/"] = "noop" } } },
+      window = { position = 'float' } })
     -- local dap = require('dap')
     -- config for js
     -- dap.adapters.node2 = {
