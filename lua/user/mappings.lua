@@ -11,11 +11,11 @@ end
 -- MARKS
 -- Remap lowercase marks to uppercase marks
 for c = string.byte('a'), string.byte('z') do
-    local char = string.char(c)
-    -- ma to mA
-    -- 'a to `A
-    vim.api.nvim_exec("nnoremap m" .. char .. " m" .. string.upper(char), false)
-    vim.api.nvim_exec("nnoremap '" .. char .. " `" .. string.upper(char), false)
+  local char = string.char(c)
+  -- ma to mA
+  -- 'a to `A
+  vim.api.nvim_exec("nnoremap m" .. char .. " m" .. string.upper(char), false)
+  vim.api.nvim_exec("nnoremap '" .. char .. " `" .. string.upper(char), false)
 end
 
 return {
@@ -78,6 +78,15 @@ return {
       end,
       desc = 'find exports function',
     },
+    ["<leader>de"] = {
+      function()
+        local current_path = vim.fn.expand("%:p")
+        local result = vim.cmd("!code -n " .. current_path)
+        print(result)
+      end,
+      desc = '!code current_path',
+    },
+
     ["<leader>ay"] = {
       function()
         combo("G?exports =<CR>VGy")
@@ -92,34 +101,46 @@ return {
     --   vim.cmd("wincmd w")
     -- end, desc = "Gvdiffsplit for current file" },
     -- ["<leader>aD"] = { "<cmd>DiffviewClose<CR>", desc = "DiffviewOpen HEAD..<word>" },
-    ["<leader>adh"] = { function()
-      local word = vim.fn.expand("<cword>")
-      vim.cmd("wincmd c")
-      vim.cmd("DiffviewOpen " .. word .. "..HEAD")
-      vim.cmd("wincmd w")
-    end, desc = "DiffviewOpen <word>..HEAD" },
-    ["<leader>add"] = { function()
-      local word = vim.fn.expand("<cword>")
-      vim.cmd("wincmd c")
-      vim.cmd("DiffviewOpen " .. word)
-      vim.cmd("wincmd w")
-      -- go to next window
-      vim.cmd("wincmd w")
-    end, desc = "DiffviewOpen <word>" },
-    ["<leader>gd"] = { function()
-      vim.cmd("DiffviewOpen")
-    end, desc = "DiffviewOpen for merging" },
-    ["<leader>atd"] = { function()
-      -- get whole current line
-      local current_line = vim.fn.getline(".")
-      -- get word following pattern \<[0-9a-f]\{7,\}\>
-      local word = vim.fn.matchstr(current_line, "\\<[0-9a-f]\\{7,\\}\\>")
-      vim.cmd("wincmd c")
-      vim.cmd("DiffviewOpen " .. word)
-      vim.cmd("wincmd w")
-      -- go to next window
-      vim.cmd("wincmd w")
-    end, desc = "DiffviewOpen from graph" },
+    ["<leader>adh"] = {
+      function()
+        local word = vim.fn.expand("<cword>")
+        vim.cmd("wincmd c")
+        vim.cmd("DiffviewOpen " .. word .. "..HEAD")
+        vim.cmd("wincmd w")
+      end,
+      desc = "DiffviewOpen <word>..HEAD"
+    },
+    ["<leader>add"] = {
+      function()
+        local word = vim.fn.expand("<cword>")
+        vim.cmd("wincmd c")
+        vim.cmd("DiffviewOpen " .. word)
+        vim.cmd("wincmd w")
+        -- go to next window
+        vim.cmd("wincmd w")
+      end,
+      desc = "DiffviewOpen <word>"
+    },
+    ["<leader>gd"] = {
+      function()
+        vim.cmd("DiffviewOpen")
+      end,
+      desc = "DiffviewOpen for merging"
+    },
+    ["<leader>atd"] = {
+      function()
+        -- get whole current line
+        local current_line = vim.fn.getline(".")
+        -- get word following pattern \<[0-9a-f]\{7,\}\>
+        local word = vim.fn.matchstr(current_line, "\\<[0-9a-f]\\{7,\\}\\>")
+        vim.cmd("wincmd c")
+        vim.cmd("DiffviewOpen " .. word)
+        vim.cmd("wincmd w")
+        -- go to next window
+        vim.cmd("wincmd w")
+      end,
+      desc = "DiffviewOpen from graph"
+    },
     -- flutter -------------------------
     -- flutter -------------------------
     -- flutter -------------------------
@@ -143,8 +164,8 @@ return {
         -- await until code action menu is open then require('hop').hint_char1()
         ---@diagnostic disable-next-line: undefined-global
         -- vim.defer_fn(function()
-          -- require('hop').hint_char1()
-          combo('jjj')
+        -- require('hop').hint_char1()
+        combo('jjj')
         -- end, 350)
       end,
       desc = "Code Action",
@@ -277,6 +298,7 @@ return {
     -- ["<leader>fR"] = { "<cmd>Telescope repo<CR>", desc = "Telescope repo" },
     ["<leader>aad"] = { "<cmd>e ~/.config/nvim/snippets/dart.snippets<CR>", desc = "dart snippets" },
     ["<leader>aam"] = { "<cmd>e ~/.config/nvim/snippets/python.snippets<CR>", desc = "python snippets" },
+    ["<leader>aax"] = { "<cmd>e ~/.config/nvim/snippets/javascriptreact.snippets<CR>", desc = "jsx snippets" },
 
 
     ["<leader>aaj"] = { "<cmd>e ~/.config/nvim/snippets/javascript.snippets<CR>", desc = "js snippets" },
@@ -293,9 +315,10 @@ return {
     -- README.md preview
     ["<leader>aap"] = {
       function()
-        local result = vim.fn.systemlist("grip&; open http://localhost:6419")
+        print('run "grip filename"')
+        local result = vim.fn.systemlist("open http://localhost:6419")
       end,
-      desc = "reload all snippets"
+      desc = "preview markdown"
     },
     -- latex
     ["<leader>aac"] = {
@@ -304,7 +327,9 @@ return {
         -- run pdflatex main.tex
         -- run pdflatex main.tex
         vim.cmd('echo "printing... no bib"')
-        local result = vim.fn.systemlist("cd ~/projects/Research/pdf_classification_vs_paf/up_mod; pdflatex main.tex; open main.pdf")
+
+        local result = vim.fn.systemlist("cd ~/projects/Research/MPH_investigation; pdflatex main.tex; open main.pdf")
+        vim.cmd('echo "done"')
       end,
       desc = "pdf build"
     },
@@ -314,7 +339,8 @@ return {
         -- run pdflatex main.tex
         -- run pdflatex main.tex
         vim.cmd('echo "printing..."')
-        local result = vim.fn.systemlist("cd ~/projects/Research/pdf_classification_vs_paf/up_mod; pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex; open main.pdf")
+        local result = vim.fn.systemlist(
+        "cd ~/projects/Research/MPH_investigation; pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex; open main.pdf")
       end,
       desc = "pdf build with bib"
     },
@@ -330,7 +356,9 @@ return {
         -- paste to next line in this pattern "console.log(' 🧪 xxx----->word', JSON.stringify(word, null, 2));"; without using combo()
         vim.cmd("normal oconsole.log(' 🧪 xxx----->" .. word .. "', JSON.stringify(" .. word .. ", null, 2));")
       end
-      , desc = "js log" },
+      ,
+      desc = "js log"
+    },
     ["<leader>aL"] = {
       function()
         -- copy current word at cursor
@@ -339,67 +367,103 @@ return {
         -- paste to next line in this pattern "console.log(' 🧪 xxx----->word', JSON.stringify(word, null, 2));"; without using combo()
         vim.cmd("normal oconsole.log(' 🧪 xxx-----> " .. word)
       end
-      , desc = "js log" },
+      ,
+      desc = "js log"
+    },
     ["<leader>vv"] = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", desc = "mapping nvim" },
     -- ["<leader>vg"] = { "<cmd>e ../../../README.groovy<CR>", desc = "groovy" },
     ["<leader>vj"] = { "<cmd>vs ~/.config/nvim/lua/user/plugins/user.lua<CR>", desc = "plugin nvim" },
     -- map leader j to telescope search command
     ["<leader>ww"] = {
       function()
-        -- go to ~/projects/daily/index.md
-        vim.cmd("vs ~/projects/daily/index.md")
-      end, desc = "go to daily/index.md" },
+        -- go to ~/projects/diary/index.md
+        vim.cmd("vs ~/projects/diary/index.md")
+      end,
+      desc = "go to diary/index.md"
+    },
+    ["<leader>wx"] = {
+      function()
+        -- go to ~/projects/diary/index.md
+        --
+        vim.cmd("vs ~/projects/diary/after-28may.md")
+      end,
+      desc = "go to after 28 may"
+    },
     ["<leader>wd"] = {
       function()
-        vim.cmd("vs ~/projects/daily/dev4geo.md")
-      end, desc = "go to ..." },
+        vim.cmd("vs ~/projects/diary/dev4geo.md")
+      end,
+      desc = "go to ..."
+    },
     ["<leader>wi"] = {
       function()
-        vim.cmd("vs ~/projects/daily/diary/diary.md")
-      end, desc = "go diary index" },
+        vim.cmd("vs ~/projects/diary/diary/diary.md")
+      end,
+      desc = "go diary index"
+    },
     ["<leader>wag"] = {
       function()
         vim.cmd("VimwikiDiaryGenerateLinks")
-      end, desc = "diary generate link" },
+      end,
+      desc = "diary generate link"
+    },
     ["<leader>waa"] = {
       function()
         vim.cmd("VimwikiMakeDiaryNote")
-      end, desc = "diary make today" },
+      end,
+      desc = "diary make today"
+    },
     ["<leader>wan"] = {
       function()
         vim.cmd("VimwikiMakeTomorrowDiaryNote")
-      end, desc = "diary make next" },
+      end,
+      desc = "diary make next"
+    },
     ["<leader>wap"] = {
       function()
         vim.cmd("VimwikiMakeYesterdayDiaryNote")
-      end, desc = "diary make prev" },
+      end,
+      desc = "diary make prev"
+    },
     ["<leader>wgn"] = {
       function()
         vim.cmd("VimwikiDiaryNextDay")
-      end, desc = "diary go next" },
+      end,
+      desc = "diary go next"
+    },
     ["<leader>wgp"] = {
       function()
         vim.cmd("VimwikiDiaryPrevDay")
-      end, desc = "diary go prev" },
+      end,
+      desc = "diary go prev"
+    },
     ["<leader>wgc"] = {
       function()
         vim.cmd("Calendar")
-      end, desc = "go calendar" },
+      end,
+      desc = "go calendar"
+    },
     ["<leader>wu"] = {
       function()
-        -- go to ~/projects/daily/index.md
+        -- go to ~/projects/diary/index.md
         vim.cmd("vs ~/projects/songkarn/utils.js")
-      end, desc = "go to ..." },
+      end,
+      desc = "go to ..."
+    },
     ["<leader>wm"] = {
       function()
         local current_bufnr = vim.fn.bufnr()
         vim.cmd("tabnew")
         vim.cmd("buffer " .. current_bufnr)
-      end, desc = "wind max" },
+      end,
+      desc = "wind max"
+    },
     ["<leader>wf"] = {
       function()
         combo('<C-w>=')
-      end, desc = "wind equal" },
+      end,
+      desc = "wind equal"
+    },
     -- ["<leader>t"] = {
     --   function ()
     --     -- split terminal to right
@@ -408,10 +472,10 @@ return {
     -- map F1 to Telescope commands; find command
     ["<F1>"] = { "<cmd>Telescope commands<CR>", desc = "Telescope commands" },
     -- map ga to back to previous file
-    ["ga"] = { "<cmd>e#<CR>", desc = "previous file" },
+    ["ga"] = { "<cmd>e#<CR><CR>", desc = "previous file" },
     ["gG"] = { "?start testing<CR>", desc = "go to first testing" },
     -- map gf to Format
-    ["gf"] = { "<cmd>Format<CR>", desc = "Format" },
+    ["gf"] = { "<cmd>silent Format<CR>", desc = "Format" },
     --
     ["<leader>ac"] = { "<cmd>Telescope command_history<CR>", desc = "command history" },
     -- map gn to GitGutterNextHunk
@@ -426,7 +490,9 @@ return {
     ["<leader>k"] = {
       function()
         combo('<leader>dh')
-      end, desc = "debug hover" },
+      end,
+      desc = "debug hover"
+    },
     ["<leader>an"] = {
       function()
         -- run command tn on zsh
@@ -437,7 +503,9 @@ return {
         vim.cmd("vsplit ~/.nvim.temp.md")
         -- vim.cmd("vsplit ~/.nvim.temp.md")
         combo('/exp<CR>zt<C-h>gg/res<CR>zt<CR>')
-      end, desc = "go to .nvim.temp.md" },
+      end,
+      desc = "go to .nvim.temp.md"
+    },
     ["<leader>t"] = {
       function()
         local current_dir = vim.fn.expand("%:p:h")
@@ -469,9 +537,12 @@ return {
     ["gH"] = { ':lua require("harpoon.mark").add_file()<CR>', desc = "harpoon add_file" },
     -- gh to harpoon quick pick
     ["gh"] = { ':lua require("harpoon.ui").toggle_quick_menu()<CR>', desc = "harpoon quick pick" },
-    ['<leader>gn'] = { function()
-      combo('<C-w>vgdzz')
-    end, desc = "split vertical window" },
+    ['<leader>gn'] = {
+      function()
+        combo('<C-w>vgdzz')
+      end,
+      desc = "split vertical window"
+    },
     -- B to ctl+d
     -- M to ctl+u
     ['B'] = { '<C-d>', desc = "scroll down" },
@@ -495,15 +566,18 @@ return {
     -- },
     ['<leader>amp'] = {
       function()
-        vim.cmd(":put =expand('%:p')")
-      end, desc = "full_path",
+        vim.cmd(":put =expand('%:p')<CR>")
+      end,
+      desc = "full_path",
     },
     ['<leader>amx'] = {
       function()
         -- vim.cmd(":put =expand('%:p')")
         local current_path = vim.fn.expand("%:p")
         vim.notify(current_path)
-      end, desc = "full_path",
+        print(current_path)
+      end,
+      desc = "full_path",
     },
     -- use <C-r>% instead
     -- ['<leader>amn'] = {
@@ -514,14 +588,23 @@ return {
     ['<leader>amh'] = {
       function()
         vim.cmd(":put =expand('%:p:h')")
-      end, desc = "file_dir",
+      end,
+      desc = "file_dir",
     },
-    ['<leader>o'] = {
+    -- ['<leader>o'] = {
+    ['<leader>e'] = {
+      function()
+        vim.cmd("Neotree focus reveal_file=" .. vim.fn.expand("%:p") .. " position=float")
+      end,
+      desc = "neotree current file",
+    },
+    ['<leader>E'] = {
       function()
         -- vim.cmd(":put =expand('%:p:h')")
         -- neotree current file
         vim.cmd("Neotree dir=" .. vim.fn.expand("%:p:h") .. " position=float")
-      end, desc = "neotree current file",
+      end,
+      desc = "neotree current dir",
     },
     ['<leader>amt'] = {
       function()
@@ -529,7 +612,8 @@ return {
         local word = vim.fn.expand("<cword>")
         -- search for word using /
         combo("/Table " .. word .. "<CR>")
-      end, desc = "table.*",
+      end,
+      desc = "table.*",
     },
     ['<leader>ame'] = {
       function()
@@ -537,12 +621,14 @@ return {
         local word = vim.fn.expand("<cword>")
         -- search for word using /
         combo("/enum " .. word .. "<CR>")
-      end, desc = "enum.*",
+      end,
+      desc = "enum.*",
     },
     ['<leader>amf'] = {
       function()
         vim.cmd('!prettier --write "/Users/walter/projects/songkarn/**/*.js"')
-      end, desc = "prettier songkarn folder",
+      end,
+      desc = "prettier songkarn folder",
     },
     ['<leader>aga'] = {
       function()
@@ -554,7 +640,8 @@ return {
         -- local result = vim.fn.systemlist("gh pr merge --auto --merge")
         -- print table
         print('result is ' .. vim.inspect(result))
-      end, desc = "gh pr approve",
+      end,
+      desc = "gh pr approve",
     },
     ['<leader>ah'] = {
       function()
@@ -700,13 +787,14 @@ return {
       end,
       desc = "toggle list"
     },
-    ['<leader>r'] = {
+    ['<leader>R'] = {
       function()
         -- lsp rename
         vim.lsp.buf.rename()
       end,
       desc = "toggle list"
     },
+    ['<leader>r'] = { ':r !', desc = "toggle list" },
     [';'] = { ':', desc = "enter command mode" },
     ['<leader>dd'] = {
       function()
@@ -859,7 +947,7 @@ return {
     -- ["<esc>"] = false,
     -- s to use HopChar1
     -- ["s"] = { "<cmd>HopChar1<cr>", desc = "Hop Word" },
-    -- ["ga"] = { "$%", desc = "last then %" },
+    ["a"] = { "%", desc = "last then %" },
     --- 1
     --- 2
     --- 3

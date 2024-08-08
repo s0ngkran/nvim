@@ -154,8 +154,8 @@ return {
         -- keywords recognized as todo: comments
         keywords = {
           FIX = {
-            icon = " ",                              -- icon used for the sign, and in search results
-            color = "error",                            -- can be a hex color, or a named color (see below)
+            icon = " ", -- icon used for the sign, and in search results
+            color = "error", -- can be a hex color, or a named color (see below)
             alt = { "FIXME", "BUG", "FIXIT", "ISSUE" }, -- a set of other keywords that all map to this FIX keywords
             -- signs = false, -- configure signs for some keywords individually
           },
@@ -709,22 +709,22 @@ return {
     config = function()
       require("bookmarks").setup({
         keymap = {
-          toggle = "<leader>aj",                                               -- Toggle bookmarks
-          add = "mmm",                                                         -- Add bookmarks
-          jump = "<leader>",                                                   -- Jump from bookmarks
-          delete = "dd",                                                       -- Delete bookmarks
-          order = "<tab><tab>",                                                -- Order bookmarks by frequency or updated_time
-          delete_on_virt = "mmd",                                              -- Delete bookmark at virt text line
-          show_desc = "mms",                                                   -- show bookmark desc
+          toggle = "<leader>aj", -- Toggle bookmarks
+          add = "mmm", -- Add bookmarks
+          jump = "<leader>", -- Jump from bookmarks
+          delete = "dd", -- Delete bookmarks
+          order = "<tab><tab>", -- Order bookmarks by frequency or updated_time
+          delete_on_virt = "mmd", -- Delete bookmark at virt text line
+          show_desc = "mms", -- show bookmark desc
         },
-        width = 0.8,                                                           -- Bookmarks window width:  (0, 1]
-        height = 0.7,                                                          -- Bookmarks window height: (0, 1]
-        preview_ratio = 0.55,                                                  -- Bookmarks preview window ratio (0, 1]
-        preview_ext_enable = false,                                            -- If true, preview buf will add file ext, preview window may be highlighed(treesitter), but may be slower.
-        fix_enable = false,                                                    -- If true, when saving the current file, if the bookmark line number of the current file changes, try to fix it.
-        virt_text = "🔖",                                                    -- Show virt text at the end of bookmarked lines
+        width = 0.8, -- Bookmarks window width:  (0, 1]
+        height = 0.7, -- Bookmarks window height: (0, 1]
+        preview_ratio = 0.55, -- Bookmarks preview window ratio (0, 1]
+        preview_ext_enable = false, -- If true, preview buf will add file ext, preview window may be highlighed(treesitter), but may be slower.
+        fix_enable = false, -- If true, when saving the current file, if the bookmark line number of the current file changes, try to fix it.
+        virt_text = "🔖", -- Show virt text at the end of bookmarked lines
         virt_pattern = { "*.go", "*.lua", "*.sh", "*.php", "*.rs", "*.dart" }, -- Show virt text only on matched pattern
-        border_style = "single",                                               -- border style: "single", "double", "rounded" hl = {
+        border_style = "single", -- border style: "single", "double", "rounded" hl = {
         --   border = "TelescopeBorder",                            -- border highlight
         --   cursorline = "guibg=Gray guifg=White",                 -- cursorline highlight
         -- }
@@ -822,19 +822,24 @@ return {
   --   end,
   -- }
   -- install without yarn or npm
+  -- install without yarn or npm
+  -- not working
   -- {
   --   "iamcco/markdown-preview.nvim",
-  --   run = function() vim.fn["mkdp#util#install"]() end,
-  -- },
-  -- {
-  --   "iamcco/markdown-preview.nvim",
-  --   run = "cd app && npm install",
-  --   setup = function()
-  --     vim.g.mkdp_filetypes = {
-  --       "markdown" }
-  --   end,
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
   --   ft = { "markdown" },
+  --   build = function() vim.fn["mkdp#util#install"]() end,
   -- },
+  -- with npm
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && npm install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
   {
     "nvim-telescope/telescope-project.nvim",
     lazy = false,
@@ -1141,5 +1146,12 @@ return {
   {
     "mattn/calendar-vim",
     lazy = false,
+  },
+  {
+    "diepm/vim-rest-console",
+    -- lazy = false,
+  },
+  {
+   'neoclide/vim-jsx-improve'
   }
 }

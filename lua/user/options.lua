@@ -72,11 +72,17 @@ return function(local_vim)
   --
   -- vim.g.textwidth = 30
 
-  -- vim.g.github_enterprise_urls = { 'https://github.com/PENGKIE/consumer' }
-  -- local_vim.g.github_enterprise_urls = { 'https://github.com/PENGKIE/consumer' }
   local_vim.opt.whichwrap = vim.opt.whichwrap - { 'b', 's' } -- removing option from list
   local_vim.opt.shortmess = vim.opt.shortmess + { I = true } -- add to option list
 
+  -- function OpenMarkdownPreview (url)
+  --   local_vim.execute("silent ! open -a Firefox -n --args --new-window " + a:url)
+  -- end
+  function OpenMarkdownPreview(url)
+    vim.cmd("silent ! open -a Google\\ Chrome -n --args --new-window a:" .. url)
+  end
+
+  local_vim.g.mkdp_browserfunc = 'OpenMarkdownPreview'
 
   return local_vim
 end
