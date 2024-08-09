@@ -373,6 +373,10 @@ return {
     ["<leader>vv"] = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", desc = "mapping nvim" },
     -- ["<leader>vg"] = { "<cmd>e ../../../README.groovy<CR>", desc = "groovy" },
     ["<leader>vj"] = { "<cmd>vs ~/.config/nvim/lua/user/plugins/user.lua<CR>", desc = "plugin nvim" },
+    ["<leader>vi"] = { "<cmd>vs ~/.config/nvim/lua/user/init.lua<CR>", desc = "init.lua" },
+    ["<leader>vf"] = { "<cmd>vs ~/.config/nvim/lua/redeye.lua<CR>", desc = "redeye.lua" },
+    ["<leader>vr"] = { "<cmd>vs ~/projects/learn_tailwind/HealthyQuest/src/stores/translation.js<CR>", desc = "translation.lua" },
+
     -- map leader j to telescope search command
     ["<leader>ww"] = {
       function()

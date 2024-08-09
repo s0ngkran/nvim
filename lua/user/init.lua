@@ -17,7 +17,8 @@ return {
     },
   },
   -- Set colorscheme to use
-  colorscheme = "astrodark",
+  colorscheme = "redeye",
+  -- colorscheme = "astrodark",
   -- colorscheme = "murphy",
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
@@ -89,20 +90,23 @@ return {
     -- unmap >> for normal mode
     vim.api.nvim_set_keymap("n", ">>", "<nop>", { noremap = true, silent = true })
     require("neo-tree").setup({
-      filesystem = {
-      },
-
       commands = {
         open_finder = function(state)
           local node = state.tree:get_node()
           local path = node:get_id()
-          os.execute('open "' .. path .. '"')
+          require("astronvim.utils").system_open(path)
+          -- os.execute('open "' .. path .. '"')
         end
       },
       window = {
-        position = 'float', mappings = { ["/"] = "noop", ["o"] = "open_finder" }
+        position = 'float',
+        mappings = {
+          ["/"] = "noop",
+          ["o"] = "open_finder",
+        }
       }
     })
+          -- require('user.colorschemes.codincat').load()
     -- local dap = require('dap')
     -- config for js
     -- dap.adapters.node2 = {

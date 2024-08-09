@@ -1152,6 +1152,9 @@ return {
     -- lazy = false,
   },
   {
-   'neoclide/vim-jsx-improve'
+    'neoclide/vim-jsx-improve'
+  },
+  {
+    's0ngkran/redeye.nvim',
   }
 }
