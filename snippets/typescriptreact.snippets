@@ -1,0 +1,52 @@
+snippet div
+	<div className="">
+    	$1
+ </div>
+
+snippet exp
+	type ${1:Name}Props = {
+		${3:title}: string;
+	};
+	const ${1:Name} = ({${3:title}}: ${1:Name}Props) => {
+  	return (
+  		//
+    	<div className="">
+      	${2: Component}
+    	</div>
+  	);
+	}
+	export default $1;
+
+snippet obs
+	export default observer($1);
+
+snippet cf
+	const ${1:Name} = () => {
+		$2
+	}
+
+snippet eff
+  useEffect(()=>{
+  	$1
+  }, [])
+
+snippet xx
+	(x)=>{
+		$1
+      	return 
+    	}
+
+snippet ex
+	export default $1
+
+
+snippet ff
+	type ${1:FunctionName}Props = {
+		${2:var}: string;
+	};
+	export async function ${1:functionName}({${2:var}}: ${1:FunctionName}Props) {
+  	await dbConnect();
+
+  	return obj;
+	}
+

@@ -1,0 +1,23 @@
+snippet div
+	<div className="">
+    	$1
+ </div>
+
+snippet exp
+	const ${1:Name} = ({}) => {
+  	return (
+    	<div className="">
+      	${2: Component}
+    	</div>
+  	);
+	}
+	export default $1;
+
+snippet obs
+	export default observer($1);
+
+snippet cf
+	const ${1:Name} = () => {
+		$2
+	}
+	export default $1;
