@@ -18,19 +18,20 @@ return {
         -- set delay 1000
         debounce_delay = 1000,
         -- set no format buffer after saved
+
       }
     end,
-  }
-  ,
-  {
-    'phaazon/hop.nvim',
-    branch = 'v2', -- optional but strongly recommended
-    lazy = false,
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-    end,
   },
+  -- use leap instead
+  -- {
+  --   'phaazon/hop.nvim',
+  --   branch = 'v2', -- optional but strongly recommended
+  --   lazy = false,
+  --   config = function()
+  --     -- you can configure Hop the way you like here; see :h hop-config
+  --     require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+  --   end,
+  -- },
   {
     'akinsho/flutter-tools.nvim',
     lazy = false,
@@ -90,48 +91,54 @@ return {
       }
     end,
   },
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   cmd = "Copilot",
-  --   lazy = false,
-  --   event = "InsertEnter",
-  --   config = function()
-  --     require('copilot').setup({
-  --       suggestion = {
-  --         enabled = true,
-  --         auto_trigger = true,
-  --         debounce = 200,
-  --         keymap = {
-  --           -- accept = "<S-CR>",
-  --           accept = "<C-x><C-x>j",
-  --           accept_word = false,
-  --           accept_line = false,
-  --           -- next = "<leader>j",
-  --           -- prev = "<leader>k",
-  --           -- dismiss = "<leader>c",
-  --         },
-  --       },
-  --       filetypes = {
-  --         dart = true,
-  --         js = true,
-  --         python = true,
-  --         javascript = true,
-  --         lua = true,
-  --         yaml = true,
-  --         markdown = true,
-  --         help = true,
-  --         gitcommit = true,
-  --         gitrebase = false,
-  --         hgcommit = false,
-  --         svn = false,
-  --         cvs = false,
-  --         ["."] = false,
-  --       },
-  --       copilot_node_command = 'node', -- Node.js version must be > 16.x
-  --       server_opts_overrides = {},
-  --     })
-  --   end,
-  -- },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    lazy = false,
+    event = "InsertEnter",
+    config = function()
+      -- to sk
+      -- to sk
+      -- to sk
+      -- to sk
+      -- to delete auth account
+      -- "rm ~/.config/github-copilot/hosts.json"
+      require('copilot').setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 200,
+          keymap = {
+            -- accept = "<S-CR>",
+            accept = "<C-x><C-x>j",
+            accept_word = false,
+            accept_line = false,
+            -- next = "<leader>j",
+            -- prev = "<leader>k",
+            -- dismiss = "<leader>c",
+          },
+        },
+        filetypes = {
+          dart = true,
+          js = true,
+          python = true,
+          javascript = true,
+          lua = true,
+          yaml = true,
+          markdown = true,
+          help = true,
+          gitcommit = true,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = false,
+        },
+        copilot_node_command = 'node', -- Node.js version must be > 16.x
+        server_opts_overrides = {},
+      })
+    end,
+  },
   {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
@@ -702,35 +709,35 @@ return {
   --   lazy = false,
   -- },
   --
-  {
-    'crusj/bookmarks.nvim',
-    branch = 'main',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function()
-      require("bookmarks").setup({
-        keymap = {
-          toggle = "<leader>aj", -- Toggle bookmarks
-          add = "mmm", -- Add bookmarks
-          jump = "<leader>", -- Jump from bookmarks
-          delete = "dd", -- Delete bookmarks
-          order = "<tab><tab>", -- Order bookmarks by frequency or updated_time
-          delete_on_virt = "mmd", -- Delete bookmark at virt text line
-          show_desc = "mms", -- show bookmark desc
-        },
-        width = 0.8, -- Bookmarks window width:  (0, 1]
-        height = 0.7, -- Bookmarks window height: (0, 1]
-        preview_ratio = 0.55, -- Bookmarks preview window ratio (0, 1]
-        preview_ext_enable = false, -- If true, preview buf will add file ext, preview window may be highlighed(treesitter), but may be slower.
-        fix_enable = false, -- If true, when saving the current file, if the bookmark line number of the current file changes, try to fix it.
-        virt_text = "🔖", -- Show virt text at the end of bookmarked lines
-        virt_pattern = { "*.go", "*.lua", "*.sh", "*.php", "*.rs", "*.dart" }, -- Show virt text only on matched pattern
-        border_style = "single", -- border style: "single", "double", "rounded" hl = {
-        --   border = "TelescopeBorder",                            -- border highlight
-        --   cursorline = "guibg=Gray guifg=White",                 -- cursorline highlight
-        -- }
-      })
-    end
-  },
+  -- {
+  --   'crusj/bookmarks.nvim',
+  --   branch = 'main',
+  --   requires = { 'kyazdani42/nvim-web-devicons' },
+  --   config = function()
+  --     require("bookmarks").setup({
+  --       keymap = {
+  --         toggle = "<leader>aj", -- Toggle bookmarks
+  --         add = "mmm", -- Add bookmarks
+  --         jump = "<leader>", -- Jump from bookmarks
+  --         delete = "dd", -- Delete bookmarks
+  --         order = "<tab><tab>", -- Order bookmarks by frequency or updated_time
+  --         delete_on_virt = "mmd", -- Delete bookmark at virt text line
+  --         show_desc = "mms", -- show bookmark desc
+  --       },
+  --       width = 0.8, -- Bookmarks window width:  (0, 1]
+  --       height = 0.7, -- Bookmarks window height: (0, 1]
+  --       preview_ratio = 0.55, -- Bookmarks preview window ratio (0, 1]
+  --       preview_ext_enable = false, -- If true, preview buf will add file ext, preview window may be highlighed(treesitter), but may be slower.
+  --       fix_enable = false, -- If true, when saving the current file, if the bookmark line number of the current file changes, try to fix it.
+  --       virt_text = "🔖", -- Show virt text at the end of bookmarked lines
+  --       virt_pattern = { "*.go", "*.lua", "*.sh", "*.php", "*.rs", "*.dart" }, -- Show virt text only on matched pattern
+  --       border_style = "single", -- border style: "single", "double", "rounded" hl = {
+  --       --   border = "TelescopeBorder",                            -- border highlight
+  --       --   cursorline = "guibg=Gray guifg=White",                 -- cursorline highlight
+  --       -- }
+  --     })
+  --   end
+  -- },
   {
     'numToStr/Comment.nvim',
     config = function()
@@ -902,6 +909,11 @@ return {
         local current_window = vim.fn.win_getid()
         require('leap').leap { target_windows = { current_window } }
       end)
+
+      -- I do not want to use S
+      -- no map for S
+      vim.api.nvim_set_keymap("n", "S", "<nop>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("v", "S", "<nop>", { noremap = true, silent = true })
     end
   },
   {
@@ -974,44 +986,44 @@ return {
     end
   },
   -- draw diagram -> not working
-  {
-    "jbyuki/venn.nvim",
-    lazy = true,
-    config = function()
-      -- venn.nvim: enable or disable keymappings
-      function _G.Toggle_venn()
-        local venn_enabled = vim.inspect(vim.b.venn_enabled)
-        if venn_enabled == "nil" then
-          vim.b.venn_enabled = true
-          vim.cmd [[setlocal ve=all]]
-          -- draw a line on HJKL keystokes
-          vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", { noremap = true })
-          vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", { noremap = true })
-          vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", { noremap = true })
-          vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", { noremap = true })
-          -- draw a box by pressing "f" with visual selection
-          vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", { noremap = true })
-          -- change statusbar color to green
-          vim.cmd [[hi StatusLine guibg=green]]
-          -- update ui using astro reload
-          vim.cmd [[AstroReload]]
-        else
-          vim.cmd [[setlocal ve=]]
-          vim.cmd [[mapclear <buffer>]]
-          vim.b.venn_enabled = nil
-          -- change statusbar to old color
-          vim.cmd [[hi StatusLine guibg=NONE]]
-          -- update
-          vim.cmd [[AstroReload]]
-        end
-      end
-
-      -- toggle keymappings for venn using <leader>v
-      vim.api.nvim_set_keymap('n', '<leader>v',
-        ":lua Toggle_venn()<CR>",
-        { noremap = true })
-    end
-  },
+  -- {
+  --   "jbyuki/venn.nvim",
+  --   lazy = true,
+  --   config = function()
+  --     -- venn.nvim: enable or disable keymappings
+  --     function _G.Toggle_venn()
+  --       local venn_enabled = vim.inspect(vim.b.venn_enabled)
+  --       if venn_enabled == "nil" then
+  --         vim.b.venn_enabled = true
+  --         vim.cmd [[setlocal ve=all]]
+  --         -- draw a line on HJKL keystokes
+  --         vim.api.nvim_buf_set_keymap(0, "n", "J", "<C-v>j:VBox<CR>", { noremap = true })
+  --         vim.api.nvim_buf_set_keymap(0, "n", "K", "<C-v>k:VBox<CR>", { noremap = true })
+  --         vim.api.nvim_buf_set_keymap(0, "n", "L", "<C-v>l:VBox<CR>", { noremap = true })
+  --         vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", { noremap = true })
+  --         -- draw a box by pressing "f" with visual selection
+  --         vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", { noremap = true })
+  --         -- change statusbar color to green
+  --         vim.cmd [[hi StatusLine guibg=green]]
+  --         -- update ui using astro reload
+  --         vim.cmd [[AstroReload]]
+  --       else
+  --         vim.cmd [[setlocal ve=]]
+  --         vim.cmd [[mapclear <buffer>]]
+  --         vim.b.venn_enabled = nil
+  --         -- change statusbar to old color
+  --         vim.cmd [[hi StatusLine guibg=NONE]]
+  --         -- update
+  --         vim.cmd [[AstroReload]]
+  --       end
+  --     end
+  --
+  --     -- toggle keymappings for venn using <leader>v
+  --     vim.api.nvim_set_keymap('n', '<leader>va',
+  --       ":lua Toggle_venn()<CR>",
+  --       { noremap = true })
+  --   end
+  -- },
   -- {
   --   "vim-scripts/DrawIt",
   --   lazy = false,
@@ -1156,5 +1168,48 @@ return {
   },
   {
     's0ngkran/redeye.nvim',
+    -- dir = '~/projects/redeye.nvim',
+    -- lazy = false,
+  },
+  -- {
+  --   -- 's0ngkran/redeye.nvim',
+  --   dir = '~/projects/redeye.nvim',
+  --   dev = true,
+  -- },
+  -- {
+  --   'MaximilianLloyd/ascii.nvim',
+  --   config = function()
+  --     require 'telescope'.load_extension('ascii')
+  --   end
+  -- }
+  {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+    config = function()
+      require("typescript-tools").setup {}
+    end,
+  },
+  -- {
+  --   "kylechui/nvim-surround",
+  --   version = "*", -- Use for stability; omit to use `main` branch for the latest features
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("nvim-surround").setup({
+  --       -- Configuration here, or leave empty to use defaults
+  --     })
+  --   end
+  -- }
+  {
+    'machakann/vim-sandwich',
+    lazy = false,
+  },
+  {
+    'napmn/react-extract.nvim',
+    config = function()
+      require("react-extract").setup()
+      vim.keymap.set({ "v" }, "<Leader>re", require("react-extract").extract_to_new_file)
+      vim.keymap.set({ "v" }, "<Leader>rc", require("react-extract").extract_to_current_file)
+    end
   }
 }
