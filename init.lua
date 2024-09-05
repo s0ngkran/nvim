@@ -1,8 +1,4 @@
 if vim.g.vscode then
-
-
-
-
   -- packer.nvim configuration
   -- Ensure the plugin manager is initialized
   -- You can modify the installation path if desired
@@ -78,7 +74,7 @@ if vim.g.vscode then
   -- vscode extension
   -- vscode extension
   for _, source in ipairs {
-    "vscode.mappings",
+    "my_vscode.mappings",
   } do
     local status_ok, fault = pcall(require, source)
     if not status_ok then vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault) end
@@ -159,5 +155,6 @@ else
   end
 
   require("astronvim.utils").conditional_func(astronvim.user_opts("polish", nil, false), true)
+
 end
  
