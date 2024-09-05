@@ -36,7 +36,7 @@ return function(local_vim)
   local_vim.g.cmp_enabled = true
   local_vim.g.autopairs_enabled = true
   local_vim.g.diagnostics_mode = 3
-  local_vim.g.icons_enabled = true
+  local_vim.g.icons_enabled = false
   local_vim.g.ui_notifications_enabled = false
   -- set no swap file
   local_vim.opt.swapfile = false

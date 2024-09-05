@@ -18,9 +18,13 @@ for c = string.byte('a'), string.byte('z') do
   vim.api.nvim_exec("nnoremap '" .. char .. " `" .. string.upper(char), false)
 end
 
+
 return {
   -- first key is the mode
   n = {
+    -- presentation
+    -- use f5 as hide all visual to enter presentation mode
+    ['<leader>a.p'] = { "<cmd>set nonumber! showtabline=0 laststatus=0<CR>" },
     -- leader f to find all files
     ["<leader>vm"] = { "<cmd>tabnew ~/.config/nvim/lua/user/mappings.lua<CR>", desc = "mapping nvim" },
     ["<leader>as"] = { "<cmd>AstroReload<cr>", desc = "Astronvim Reload" },
@@ -38,7 +42,8 @@ return {
     ["<leader>bT"] = { "<cmd>tabprevious<cr>", desc = "tab prev" },
 
     -- ignore recorder
-    ["q"] = { "<cmd>!echo recorder is disabled<cr>", desc = "recorder" },
+    -- ["q"] = { "<cmd>!echo use shift+Q <cr>", desc = "recorder" },
+    -- ["Q"] = { "<cmd>"}
 
     ["<leader>bD"] = {
       function()
@@ -72,12 +77,6 @@ return {
     -- ["<leader>aorc"] = { "<cmd>Octo review close<cr>", desc = "Octo review close" },
     -- ["<leader>aopc"] = { "<cmd>Octo pr create<cr>", desc = "Octo pr create" },
     -- ["<leader><leader>"] = { '<C-w>w', desc = "switch window" },
-    ["<leader>ae"] = {
-      function()
-        combo("G?exports =<CR>")
-      end,
-      desc = 'find exports function',
-    },
     ["<leader>de"] = {
       function()
         local current_path = vim.fn.expand("%:p")
@@ -165,7 +164,7 @@ return {
         ---@diagnostic disable-next-line: undefined-global
         -- vim.defer_fn(function()
         -- require('hop').hint_char1()
-        combo('jjj')
+        -- combo('jjj')
         -- end, 350)
       end,
       desc = "Code Action",
@@ -215,8 +214,8 @@ return {
     ["-D"] = { "<cmd>Gitsigns prev_hunk<cr>", desc = "prev hunk" },
     ["<leader>gP"] = { "<cmd>Git pull origin main<cr>", desc = "pull from main" },
     --- key binding
-    ["H"] = { "0", desc = "go to first char" },
-    ["L"] = { "$", desc = "go to last char" },
+    -- ["H"] = { "0", desc = "go to first char" },
+    -- ["L"] = { "$", desc = "go to last char" },
 
     -- ga to $%
     -- ["ga"] = { "$h%", desc = "last then %" },
@@ -299,6 +298,7 @@ return {
     ["<leader>aad"] = { "<cmd>e ~/.config/nvim/snippets/dart.snippets<CR>", desc = "dart snippets" },
     ["<leader>aam"] = { "<cmd>e ~/.config/nvim/snippets/python.snippets<CR>", desc = "python snippets" },
     ["<leader>aax"] = { "<cmd>e ~/.config/nvim/snippets/javascriptreact.snippets<CR>", desc = "jsx snippets" },
+    ["<leader>aaX"] = { "<cmd>e ~/.config/nvim/snippets/typescriptreact.snippets<CR>", desc = "tsx snippets" },
 
 
     ["<leader>aaj"] = { "<cmd>e ~/.config/nvim/snippets/javascript.snippets<CR>", desc = "js snippets" },
@@ -340,7 +340,7 @@ return {
         -- run pdflatex main.tex
         vim.cmd('echo "printing..."')
         local result = vim.fn.systemlist(
-        "cd ~/projects/Research/MPH_investigation; pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex; open main.pdf")
+          "cd ~/projects/Research/MPH_investigation; pdflatex main.tex; bibtex main; pdflatex main.tex; pdflatex main.tex; open main.pdf")
       end,
       desc = "pdf build with bib"
     },
@@ -372,7 +372,13 @@ return {
     },
     ["<leader>vv"] = { "<cmd>lua require'telescope'.extensions.project.project{}<CR>", desc = "mapping nvim" },
     -- ["<leader>vg"] = { "<cmd>e ../../../README.groovy<CR>", desc = "groovy" },
-    ["<leader>vj"] = { "<cmd>vs ~/.config/nvim/lua/user/plugins/user.lua<CR>", desc = "plugin nvim" },
+    ["<leader>vj"] = {
+      function()
+        vim.cmd("ASToggle")
+        vim.cmd('vs ~/.config/nvim/lua/user/plugins/user.lua')
+      end,
+      desc = "plugin nvim"
+    },
     ["<leader>vi"] = { "<cmd>vs ~/.config/nvim/lua/user/init.lua<CR>", desc = "init.lua" },
     ["<leader>vf"] = { "<cmd>vs ~/.config/nvim/lua/redeye.lua<CR>", desc = "redeye.lua" },
     ["<leader>vr"] = { "<cmd>vs ~/projects/learn_tailwind/HealthyQuest/src/stores/translation.js<CR>", desc = "translation.lua" },
@@ -381,7 +387,7 @@ return {
     ["<leader>ww"] = {
       function()
         -- go to ~/projects/diary/index.md
-        vim.cmd("vs ~/projects/diary/index.md")
+        vim.cmd("vs ~/projects/diary/README.md")
       end,
       desc = "go to diary/index.md"
     },
@@ -479,7 +485,13 @@ return {
     ["ga"] = { "<cmd>e#<CR><CR>", desc = "previous file" },
     ["gG"] = { "?start testing<CR>", desc = "go to first testing" },
     -- map gf to Format
-    ["gf"] = { "<cmd>silent Format<CR>", desc = "Format" },
+    -- ["gf"] = { "<cmd>silent Format<CR>", desc = "Format" },
+    ["gf"] = {
+      function()
+        vim.cmd("silent Format")
+      end,
+      desc = "Format"
+    },
     --
     ["<leader>ac"] = { "<cmd>Telescope command_history<CR>", desc = "command history" },
     -- map gn to GitGutterNextHunk
@@ -499,14 +511,13 @@ return {
     },
     ["<leader>an"] = {
       function()
-        -- run command tn on zsh
-
-        local result = vim.fn.systemlist('clear; node test > ~/.nvim.temp.md; echo "done->~/.nvim.temp.md";')
+        -- local result = vim.fn.systemlist('clear; node test > ~/.nvim.temp.md; echo "done->~/.nvim.temp.md";')
+        local result = vim.fn.systemlist('clear; bash test.sh > ~/.nvim.temp.md; echo "done->~/.nvim.temp.md";')
 
         vim.cmd("tabnew ~/.nvim.temp.md")
-        vim.cmd("vsplit ~/.nvim.temp.md")
         -- vim.cmd("vsplit ~/.nvim.temp.md")
-        combo('/exp<CR>zt<C-h>gg/res<CR>zt<CR>')
+        -- vim.cmd("vsplit ~/.nvim.temp.md")
+        -- combo('/exp<CR>zt<C-h>gg/res<CR>zt<CR>')
       end,
       desc = "go to .nvim.temp.md"
     },
@@ -526,14 +537,16 @@ return {
     ["gt"] = { "<cmd>DiffviewOpen<CR>", desc = "DiffviewOpen" },
     ["gr"] = {
       function()
-        combo("\\gd")
+        -- split window
+        combo('<C-w>v')
+        combo("gd")
       end,
       desc = "new win"
     },
     -- map leader w h to swap window to left
     ["<leader>wh"] = { "<C-w>h", desc = "swap window to left" },
-    -- ["L"] = { ":bnext<CR>", desc = "bnext" },
-    -- ["H"] = { ":bprevious<CR>", desc = "bprevious" },
+    ["L"] = { ":bnext<CR> :redraw!<CR>", desc = "bnext" },
+    ["H"] = { ":bprevious<CR> :redraw!<CR>", desc = "bprevious" },
     -- ["L"] = { ":tabnext<CR>", desc = "bnext" },
     -- ["H"] = { ":tabprevious<CR>", desc = "bprevious" },
     -- leader h n to split vertical window
@@ -570,7 +583,7 @@ return {
     -- },
     ['<leader>amp'] = {
       function()
-        vim.cmd(":put =expand('%:p')<CR>")
+        vim.cmd(":put =expand('%:p')")
       end,
       desc = "full_path",
     },
@@ -598,7 +611,7 @@ return {
     -- ['<leader>o'] = {
     ['<leader>e'] = {
       function()
-        vim.cmd("Neotree focus reveal_file=" .. vim.fn.expand("%:p") .. " position=float")
+        vim.cmd("Neotree")
       end,
       desc = "neotree current file",
     },
@@ -606,7 +619,7 @@ return {
       function()
         -- vim.cmd(":put =expand('%:p:h')")
         -- neotree current file
-        vim.cmd("Neotree dir=" .. vim.fn.expand("%:p:h") .. " position=float")
+        vim.cmd("Neotree dir=" .. vim.fn.expand("%:p:h") .. "")
       end,
       desc = "neotree current dir",
     },
@@ -791,14 +804,40 @@ return {
       end,
       desc = "toggle list"
     },
-    ['<leader>R'] = {
+    ['<leader>,t'] = {
+      function()
+        combo('zaVsatdiv<CR>gf')
+      end,
+      desc = "wrap <tag>"
+    },
+    ['<leader>,w'] = {
+      function()
+        combo('saawtdiv<CR>gf')
+      end,
+      desc = "wrap <tag>"
+    },
+    ['<leader>,c'] = {
+      function()
+        combo('/><CR>i className=""<ESC>i')
+      end,
+      desc = "wrap <tag>"
+    },
+    ['<leader>ae'] = {
+      function()
+        combo('vatJV<leader>resrc/components/My')
+        -- require("react-extract").extract_to_new_file()
+        -- combo('src/components/My')
+      end,
+      desc = "tsx Extract"
+    },
+    ['<leader>.r'] = {
       function()
         -- lsp rename
         vim.lsp.buf.rename()
       end,
       desc = "toggle list"
     },
-    ['<leader>r'] = { ':r !', desc = "toggle list" },
+    ['<leader>,,'] = { ':r !', desc = "toggle list" },
     [';'] = { ':', desc = "enter command mode" },
     ['<leader>dd'] = {
       function()
@@ -826,7 +865,7 @@ return {
         -- neotree set root with dir
         -- using Neotree dir=...
         vim.cmd('tabnew')
-        vim.cmd("Neotree dir=" .. dir .. " position=float")
+        vim.cmd("Neotree dir=" .. dir .. "")
         -- quit neotree using cmd
         -- vim.cmd('Neotree close')
         -- delay 1 sec then quit
@@ -951,7 +990,22 @@ return {
     -- ["<esc>"] = false,
     -- s to use HopChar1
     -- ["s"] = { "<cmd>HopChar1<cr>", desc = "Hop Word" },
-    ["a"] = { "%", desc = "last then %" },
+    ["ga"] = { "%", desc = "last then %" },
+    ["gl"] = {
+      function()
+        require('code_action_menu').open_code_action_menu()
+      end
+      ,
+      desc = "last then %"
+    },
+    -- ["m"] = {
+    --   function()
+    --     -- vim.cmd("normal! V")
+    --     require("react-extract").extract_to_new_file()
+    --     combo('src/components/My')
+    --   end,
+    --   desc = "jsx tsx extract to new file"
+    -- },
     --- 1
     --- 2
     --- 3
