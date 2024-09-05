@@ -1,0 +1,166 @@
+{
+  "dart.previewFlutterUiGuides": true,
+  "dart.previewFlutterUiGuidesCustomTracking": true,
+  "dart.showInspectorNotificationsForWidgetErrors": false,
+  "editor.formatOnSave": false,
+  "terminal.integrated.inheritEnv": false,
+  "zenMode.centerLayout": false,
+  "zenMode.hideLineNumbers": false,
+  "zenMode.silentNotifications": false,
+  "diffEditor.wordWrap": "off",
+  "dart.debugExternalPackageLibraries": false,
+  "dart.debugSdkLibraries": false,
+  "git.enableSmartCommit": true,
+  "editor.scrollBeyondLastColumn": 33,
+  "editor.minimap.maxColumn": 1222,
+  "editor.wordWrap": "off",
+  "debug.console.wordWrap": false,
+  "workbench.colorTheme": "CodinCat",
+  "workbench.editorAssociations": {
+    "*.pdf": "default"
+  },
+  "jsonToDart.json.codecs": true,
+  "jsonToDart.fastMode": true,
+  "dart.analyzerSshHost": null,
+  "git.useEditorAsCommitInput": false,
+  "jsonToDart.avoidDynamicTypes": true,
+  "jsonToDart.primaryConfiguration": true,
+  "jsonToDart.runBuilder": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.stickyScroll.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.dart": "${capture}.g.dart, ${capture}.freezed.dart"
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+
+  "security.workspace.trust.enabled": false,
+  "dart.warnWhenEditingFilesOutsideWorkspace": false,
+  "dart.renameFilesWithClasses": "prompt",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.fontSize": 12,
+  "debug.console.fontSize": 14,
+  "debug.autoExpandLazyVariables": true,
+  "dart.warnWhenEditingFilesInPubCache": false,
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "arduino.path": "/Volumes/CIRCUITPY",
+  "[markdown]": {
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    },
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  // "dart.flutterSdkPath": ".fvm/flutter_sdk",
+  // "dart.flutterSdkPaths": ["/Users/walter/fvm/versions"],
+  // // Remove .fvm files from search
+  // "search.exclude": {
+  //   "**/.fvm": true
+  // },
+  // // Remove from file watching
+  // "files.watcherExclude": {
+  //   "**/.fvm": true
+  // },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "workbench.editor.openSideBySideDirection": "right",
+  "javascript.updateImportsOnFileMove.enabled": "never",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorCustomizations": {
+    "workbench.nvimColorNormal": "#03CF03",
+    "workbench.nvimColorInsert": "#D32F2F",
+    "workbench.nvimColorVisual": "#673AB7",
+    "workbench.nvimColorReplace": "#000",
+    "statusBar.background": "#004F83",
+    "statusBar.noFolderBackground": "#004F83",
+    "statusBar.debuggingBackground": "#004F83",
+    "tab.activeBorder": "#ffc600",
+    "editorCursor.foreground": "#ffc600"
+  },
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "info", "hint"],
+  "errorLens.enableOnDiffView": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false
+  },
+  "git.autofetch": true,
+
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "dart.checkForSdkUpdates": false,
+  "powermode.enabled": true,
+  "powermode.shake.enabled": false,
+  "powermode.explosions.offset": 0.35,
+  "powermode.combo.counterEnabled": "hide",
+  "powermode.combo.location": "off",
+  "powermode.combo.timerEnabled": "hide",
+  "githubPullRequests.setAutoMerge": true,
+  "githubPullRequests.quickDiff": true,
+  "gitlens.currentLine.enabled": false,
+  "git.confirmSync": false,
+  "editor.acceptSuggestionOnEnter": "off",
+  "editor.tabCompletion": "on",
+  "emmet.triggerExpansionOnTab": true,
+  "explorer.confirmDelete": false,
+  "settingsSync.ignoredSettings": [],
+  "diffEditor.ignoreTrimWhitespace": false,
+  "terminal.integrated.env.osx": {
+    "FIG_NEW_SESSION": "1"
+  },
+  "editor.accessibilitySupport": "off",
+  "githubPullRequests.pullBranch": "never",
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+  "vscode-neovim.neovimInitVimPaths.darwin": "~/.config/nvim/init.lua",
+  "nvim-ui.nvimColorVisual": "#ffc600",
+  "todohighlight.isEnable": true,
+  "todohighlight.keywords": [
+    {
+      "text": "UU",
+      "color": "#FF0BFB",
+      "backgroundColor": "#FF03F7",
+      "overviewRulerColor": "grey"
+    },
+    {
+      "text": "(origin/",
+      "color": "#FFFFFF",
+      "backgroundColor": "#F5FFF900",
+      "overviewRulerColor": "grey"
+    },
+    {
+      "text": "origin/HEAD",
+      "color": "#15FF00",
+      "backgroundColor": "#46FF8400",
+      "overviewRulerColor": "grey"
+    },
+    {
+      "text": "HEAD -> ",
+      "color": "#FFF700",
+      "backgroundColor": "#FFEE0000",
+      "overviewRulerColor": "grey"
+    },
+    {
+      "text": "s0ngkran",
+      "color": "#FFD000",
+      "backgroundColor": "#FFFFFF00",
+      "overviewRulerColor": "grey"
+    }
+  ],
+  "files.autoSave": "afterDelay",
+  "explorer.confirmDragAndDrop": false,
+  "window.zoomLevel": 1
+}
